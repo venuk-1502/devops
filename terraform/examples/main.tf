@@ -26,15 +26,15 @@ resource "aws_security_group" "allow_all" {
 
   ingress = [
     {
-      from_port        = 0
-      to_port          = 0
+      from_port        = 22
+      to_port          = 22
       description      = "allow incoming"
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = []
-      self             = true
+      self             = false
     }
   ]
 
@@ -48,7 +48,7 @@ resource "aws_security_group" "allow_all" {
       ipv6_cidr_blocks = ["::/0"]
       prefix_list_ids  = []
       security_groups  = []
-      self             = true
+      self             = false
     }
   ]
 
