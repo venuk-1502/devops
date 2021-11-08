@@ -6,6 +6,8 @@ resource "aws_spot_instance_request" "ec2_instance" {
   count         = length(var.components)
   ami           = "ami-0dc863062bc04e1de"
   instance_type = "t2.micro"
+  spot_type = "persistent"
+  instance_interruption_behavior = "stop"
   wait_for_fulfillment = true
   vpc_security_group_ids = [aws_security_group.allow_all.id]
   tags = {
@@ -21,7 +23,7 @@ resource "aws_ec2_tag" "ec2_tag" {
 }
 
 variable "components" {
-  default = ["cart", "catalogue", "mongodb"]
+  default = ["cart"]
 }
 
 resource "aws_security_group" "allow_all" {
