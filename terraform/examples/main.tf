@@ -83,5 +83,6 @@ terraform {
   backend "s3" {
     bucket = "tfstate-devopsvenu"
     key    = "tfstate/terraform.tfstate"
+    region = "us-east-1"
   }
 }
