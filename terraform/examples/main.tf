@@ -78,3 +78,10 @@ resource "aws_s3_bucket_object" "tfstate_bucket_folder" {
   acl    = "private"
   key    = "tfstate/"
 }
+
+terraform {
+  backend "s3" {
+    bucket = aws_s3_bucket.terraform-s3.bucket
+    key    = aws_s3_bucket_object.tfstate_bucket_folder.key
+  }
+}
