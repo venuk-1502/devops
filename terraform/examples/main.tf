@@ -65,10 +65,10 @@ resource "aws_security_group" "allow_all" {
 }
 
 resource "aws_s3_bucket" "tfstate_bucket" {
-  bucket = "tfstate_terraform_bucket"
+  bucket = "tfstate-terraform-bucket"
   acl    = "private"
 
   tags = {
-    Name        = "terraform_bucket"
+    Name        = "terraform-bucket"
   }
 }
