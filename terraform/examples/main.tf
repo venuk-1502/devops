@@ -82,6 +82,6 @@ resource "aws_s3_bucket_object" "tfstate_bucket_folder" {
 terraform {
   backend "s3" {
     bucket = "tfstate-devopsvenu"
-    key    = "tfstate/"
+    key    = "tfstate/terraform.tfstate"
   }
 }
