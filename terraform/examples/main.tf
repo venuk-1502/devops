@@ -64,11 +64,18 @@ resource "aws_security_group" "allow_all" {
   }
 }
 
-resource "aws_s3_bucket" "tfstate_bucket" {
+resource "aws_s3_bucket" "terraform-s3" {
   bucket = "tfstate-devopsvenu"
   acl    = "private"
 
   tags = {
     Name        = "terraform-bucket"
   }
+}
+
+resource "aws_s3_bucket_object" "tfstate_bucket_folder" {
+  bucket = "tfstate-devopsvenu"
+  acl    = "private"
+  key    = "tfstate/"
+  source = "/dev/null"
 }
