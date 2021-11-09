@@ -1,0 +1,3 @@
+COMPONENT: mongodb
+APP_LOC: /usr/share/nginx/html/
+APP_TYPE: backend
