@@ -27,8 +27,8 @@
     remote_src: yes
 
 - name: Copy file with owner and permissions
-  ansible.builtin.copy:
-    src: /usr/share/nginx/html/localhost.conf
+  ansible.builtin.template:
+    src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
     remote_src: yes
 
