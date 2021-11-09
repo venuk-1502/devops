@@ -3,22 +3,10 @@
     name: nginx
     state: present
 
-- name: Download and Unarchive app files
-  ansible.builtin.unarchive:
-    src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
-    dest: /tmp/
-    remote_src: yes
-
-- name: Recursively remove directory
-  ansible.builtin.file:
-    path: /usr/share/nginx/html/
-    state: absent
-
-- name: Copy file with owner and permissions
-  ansible.builtin.copy:
-    src: /tmp/frontend-main/
-    dest: /usr/share/nginx/html/
-    remote_src: yes
+- name: Download code
+  include_role:
+    name: common
+    tasks_from: download
 
 - name: Copy file with owner and permissions
   ansible.builtin.copy:
