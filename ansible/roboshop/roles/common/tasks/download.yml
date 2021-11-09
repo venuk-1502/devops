@@ -8,3 +8,11 @@
   ansible.builtin.file:
     path: "{{APP_LOC}}"
     state: absent
+
+- name: copy code to app location
+  ansible.builtin.copy:
+    src: /tmp/{{COMPONENT}}-main/
+    dest: "{{APP_LOC}}"
+    remote_src: yes
+  when: APP_TYPE == "backend"
+  become_user: {{APP_USER}}
