@@ -9,6 +9,7 @@
     url: https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
     dest: /etc/yum.repos.d/mongodb.repo
 
+
 - name: Install mongodb
   ansible.builtin.yum:
     name: mongodb-org
@@ -20,10 +21,12 @@
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
 
-- name: systemd service configuration and restart
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: systemd
+- name: Restart mongod service
+  ansible.builtin.systemd:
+    name: mongod
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
 
 - name: Download mongodb schema
   ansible.builtin.include_role:
