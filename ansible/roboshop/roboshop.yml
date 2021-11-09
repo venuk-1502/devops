@@ -4,3 +4,10 @@
   tags: frontend
   roles:
     - frontend
+
+- name: Deploy frontend
+  hosts: frontend
+  become: true
+  tags: frontend
+  roles:
+    - frontend

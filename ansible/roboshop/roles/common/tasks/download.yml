@@ -6,5 +6,5 @@
 
 - name: Recursively remove existing directory content
   ansible.builtin.file:
-    path: {{APP_LOC}}
+    path: "{{APP_LOC}}"
     state: absent
