@@ -23,7 +23,7 @@ resource "aws_ec2_tag" "ec2_tag" {
 }
 
 variable "components" {
-  default = ["cart"]
+  default = ["frontend"]
 }
 
 resource "aws_security_group" "allow_all" {
@@ -85,4 +85,14 @@ terraform {
     key    = "tfstate/terraform.tfstate"
     region = "us-east-1"
   }
+}
+
+resource "aws_route53_record" "route53_records" {
+  count   = length(var.components)
+  zone_id = "Z00216652JEVANUOGF0R3"
+  name    = "${element(var.components, count.index)}-dev.knowaws.com"
+  allow_overwrite = true
+  type    = "A"
+  ttl     = "300"
+  records = [element(aws_spot_instance_request.ec2_instance.*.private_ip, count.index)]
 }
