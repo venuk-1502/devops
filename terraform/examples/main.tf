@@ -64,20 +64,20 @@ resource "aws_security_group" "allow_all" {
   }
 }
 
-resource "aws_s3_bucket" "terraform-s3" {
-  bucket = "tfstate-devopsvenu"
-  acl    = "private"
-  force_destroy = true
-  tags = {
-    Name        = "terraform-bucket"
-  }
-}
-
-resource "aws_s3_bucket_object" "tfstate_bucket_folder" {
-  bucket = aws_s3_bucket.terraform-s3.bucket
-  acl    = "private"
-  key    = "tfstate/"
-}
+#resource "aws_s3_bucket" "terraform-s3" {
+#  bucket = "tfstate-devopsvenu"
+#  acl    = "private"
+#  force_destroy = true
+#  tags = {
+#    Name        = "terraform-bucket"
+#  }
+#}
+#
+#resource "aws_s3_bucket_object" "tfstate_bucket_folder" {
+#  bucket = aws_s3_bucket.terraform-s3.bucket
+#  acl    = "private"
+#  key    = "tfstate/"
+#}
 
 #terraform {
 #  backend "s3" {
