@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_spot_instance_request" "ec2_instance" {
   count         = length(var.components)
-  ami           = "ami-0dc863062bc04e1de"
+  ami           = data.aws_ami.devops_ami.id
   instance_type = "t2.micro"
   spot_type = "persistent"
   instance_interruption_behavior = "stop"
@@ -13,6 +13,12 @@ resource "aws_spot_instance_request" "ec2_instance" {
   tags = {
     Name = element(var.components, count.index)
   }
+}
+
+data "aws_ami" "devops_ami" {
+  most_recent      = true
+  name_regex       = "^Centos"
+  owners           = ["973714476881"]
 }
 
 resource "aws_ec2_tag" "ec2_tag" {
