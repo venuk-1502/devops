@@ -1,13 +1,20 @@
-- name: Copy mongodb repo file
-  ansible.builtin.copy:
-    src: https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
+#- name: Copy mongodb repo file
+#  ansible.builtin.copy:
+#    src: https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
+#    dest: /etc/yum.repos.d/mongodb.repo
+#    remote_src: yes
+#
+- name: Download foo.conf
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
     dest: /etc/yum.repos.d/mongodb.repo
-    remote_src: yes
 
 - name: Install mongodb
   ansible.builtin.yum:
     name: mongodb-org
     state: present
+
+
 
 #- name: systemd service configuration and restart
 #  ansible.builtin.include_role:
