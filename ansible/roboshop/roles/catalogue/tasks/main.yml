@@ -22,9 +22,9 @@
 - name: Install packages based on package.json using the npm
   community.general.npm:
     path: /home/roboshop/{{COMPONENT}}
-    executable: "/home/roboshop/{{COMPONENT}}/npm"
+    executable: /home/roboshop/{{COMPONENT}}/npm
     state: present
-  become_user: "{{APP_USER}}"
+  become_user: roboshop
 
 - name: systemd service configuration and restart
   ansible.builtin.include_role:
