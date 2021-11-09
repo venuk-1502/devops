@@ -23,7 +23,7 @@ resource "aws_ec2_tag" "ec2_tag" {
 }
 
 variable "components" {
-  default = ["frontend", "catalogue"]
+  default = ["frontend", "catalogue", "cart", "shipping", "user", "payment", "mongodb", "mysql", "redis", "rebbitmq"]
 }
 
 resource "aws_security_group" "allow_all" {
