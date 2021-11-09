@@ -22,7 +22,6 @@
 - name: Install packages based on package.json using the npm
   community.general.npm:
     path: /home/roboshop/{{COMPONENT}}
-    executable: /home/roboshop/{{COMPONENT}}/npm
     state: present
   become_user: roboshop
 
