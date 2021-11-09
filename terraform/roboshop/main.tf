@@ -27,7 +27,7 @@ variable "components" {
 }
 
 resource "aws_security_group" "allow_all" {
-  name        = "allow_all_1"
+  name        = "allow_all_2"
   description = "Allow all traffic"
   vpc_id      = "vpc-0460de79"
 
@@ -60,7 +60,7 @@ resource "aws_security_group" "allow_all" {
   ]
 
   tags = {
-    Name = "allow_all_1"
+    Name = "allow_all_2"
   }
 }
 
