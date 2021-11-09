@@ -23,7 +23,7 @@ resource "aws_ec2_tag" "ec2_tag" {
 }
 
 variable "components" {
-  default = ["frontend"]
+  default = ["frontend", "catalogue"]
 }
 
 resource "aws_security_group" "allow_all" {
