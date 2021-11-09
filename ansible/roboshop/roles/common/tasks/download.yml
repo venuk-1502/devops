@@ -15,4 +15,4 @@
     dest: "{{APP_LOC}}"
     remote_src: yes
   when: APP_TYPE == "backend"
-  become_user: APP_USER
+  become_user: "{{APP_USER}}"
