@@ -4,7 +4,7 @@
 #    dest: /etc/yum.repos.d/mongodb.repo
 #    remote_src: yes
 #
-- name: Download foo.conf
+- name: Download mongodb repo file
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
     dest: /etc/yum.repos.d/mongodb.repo
@@ -14,12 +14,29 @@
     name: mongodb-org
     state: present
 
+- name: Change Listen address to 0.0.0.0
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
 
+- name: systemd service configuration and restart
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
 
-#- name: systemd service configuration and restart
-#  ansible.builtin.include_role:
-#    name: common
-#    tasks_from: systemd
+- name: Download mongodb schema
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: load schema(.js file) to mongodb
+  community.mongodb.mongodb_shell:
+    file: "/tmp/mongodb-main/{{item}}.js"
+    idempotent: yes
+  loop:
+    - catalogue
+    - user
 
 ## curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
 #  Install Mongo & Start Service.
