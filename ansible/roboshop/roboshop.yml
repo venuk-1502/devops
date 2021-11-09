@@ -1,13 +1,20 @@
-- name: Deploy frontend
-  hosts: frontend
+#- name: Deploy frontend
+#  hosts: frontend
+#  become: true
+#  tags: frontend
+#  roles:
+#    - frontend
+#
+#- name: Deploy catalogue
+#  hosts: catalogue
+#  become: true
+#  tags: catalogue
+#  roles:
+#    - catalogue
+#
+- name: Deploy mongodb
+  hosts: mongodb
   become: true
-  tags: frontend
+  tags: mongodb
   roles:
-    - frontend
-
-- name: Deploy catalogue
-  hosts: catalogue
-  become: true
-  tags: catalogue
-  roles:
-    - catalogue
+    - mongodb
