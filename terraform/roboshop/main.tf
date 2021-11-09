@@ -33,8 +33,8 @@ resource "aws_security_group" "allow_all" {
 
   ingress = [
     {
-      from_port        = 22
-      to_port          = 22
+      from_port        = 0
+      to_port          = 65535
       description      = "allow incoming"
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
@@ -48,7 +48,7 @@ resource "aws_security_group" "allow_all" {
   egress = [
     {
       from_port        = 0
-      to_port          = 0
+      to_port          = 65535
       protocol         = "-1"
       description      = "allow outgoing"
       cidr_blocks      = ["0.0.0.0/0"]
