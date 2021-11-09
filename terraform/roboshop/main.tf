@@ -80,13 +80,13 @@ resource "aws_s3_bucket_object" "tfstate_bucket_folder" {
   key    = "tfstate/"
 }
 
-#terraform {
-#  backend "s3" {
-#    bucket = "tfstate-devopsvenu"
-#    key    = "tfstate/terraform.tfstate"
-#    region = "us-east-1"
-#  }
-#}
+terraform {
+  backend "s3" {
+    bucket = "tfstate-devopsvenu"
+    key    = "tfstate/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
 
 resource "aws_route53_record" "route53_records" {
   count   = length(var.components)

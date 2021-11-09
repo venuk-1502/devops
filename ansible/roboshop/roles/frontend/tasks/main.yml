@@ -1,20 +1,45 @@
-[frontend]
-frontend-dev.roboshop.internal
-[cart]
-cart-dev.roboshop.internal
-[catalogue]
-catalogue-dev.roboshop.internal
-[payment]
-payment-dev.roboshop.internal
-[shipping]
-shipping-dev.roboshop.internal
-[mysql]
-mysql-dev.roboshop.internal
-[mongodb]
-mongodb-dev.roboshop.internal
-[redis]
-redis-dev.roboshop.internal
-[rabbitmq]
-rabbitmq-dev.roboshop.internal
-[user]
-user-dev.roboshop.internal
+- name: Install the latest version of Nginx
+  ansible.builtin.yum:
+    name: nginx
+    state: present
+
+- name: Download and Unarchive app files
+  ansible.builtin.unarchive:
+    src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
+    dest: /tmp/
+    remote_src: yes
+
+- name: Recursively remove directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html/
+    state: absent
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: /tmp/frontend-main/
+    dest: /usr/share/nginx/html/
+    remote_src: yes
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: /tmp/frontend-main/static/
+    dest: /usr/share/nginx/html/
+    remote_src: yes
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: /usr/share/nginx/html/localhost.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+    remote_src: yes
+
+- name: Restarting nginx service
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+- name: Recursively remove directory
+  ansible.builtin.file:
+    path: /tmp/frontend-main
+    state: absent
