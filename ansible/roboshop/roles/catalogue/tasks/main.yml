@@ -24,7 +24,7 @@
     path: /home/roboshop/{{COMPONENT}}
     executable: "/home/roboshop/{{COMPONENT}}/npm"
     state: present
-  become_user: roboshop
+  become_user: "{{APP_USER}}"
 
 - name: systemd service configuration and restart
   ansible.builtin.include_role:
