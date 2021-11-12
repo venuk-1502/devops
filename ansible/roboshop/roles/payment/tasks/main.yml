@@ -29,11 +29,6 @@
     executable: pip3
   become: true
 
-- name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
-  pip:
-    name: bottle
-    executable: pip3.3
-
 - name: Update APP user UID
   ansible.builtin.lineinfile:
     path: /home/roboshop/payment/payment.ini
