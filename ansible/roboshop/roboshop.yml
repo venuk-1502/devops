@@ -46,3 +46,10 @@
   tags: mysql
   roles:
     - mysql
+
+- name: Deploy Shipping
+  hosts: shipping
+  become: shipping
+  tags: shipping
+  roles:
+    - shipping
