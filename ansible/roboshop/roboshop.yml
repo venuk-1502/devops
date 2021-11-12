@@ -49,7 +49,7 @@
 
 - name: Deploy Shipping
   hosts: shipping
-  become: shipping
+  become: true
   tags: shipping
   roles:
     - shipping
