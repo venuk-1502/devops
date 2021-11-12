@@ -14,7 +14,9 @@
 
 - name: Install MySQL
   ansible.builtin.yum:
-    name: mysql-community-server
+    name:
+    - mysql-community-server
+    - python36-PyMySQL.noarch
     state: present
 
 - name: Getting default root password
