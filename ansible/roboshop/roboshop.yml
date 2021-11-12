@@ -32,3 +32,10 @@
   tags: user
   roles:
     - user
+
+- name: Deploy Redis
+  hosts: redis
+  become: true
+  tags: redis
+  roles:
+    - redis
