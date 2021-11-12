@@ -26,7 +26,7 @@
   community.mysql.mysql_user:
     login_host: 'localhost'
     login_user: 'root'
-    login_password: "{{default_pass}}"
+    login_password: "{{defaultpass}}"
     name: 'root'
     password: DevOps321
     state: present
