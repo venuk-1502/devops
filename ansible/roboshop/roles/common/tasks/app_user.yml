@@ -2,3 +2,4 @@
   ansible.builtin.user:
     name: roboshop
     comment: roboshop user
+  register: app_user_info

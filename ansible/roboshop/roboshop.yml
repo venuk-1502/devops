@@ -53,3 +53,17 @@
   tags: shipping
   roles:
     - shipping
+
+- name: Deploy RabbitMQ
+  hosts: rabbitmq
+  become: true
+  tags: rabbitmq
+  roles:
+    - rabbitmq
+
+- name: Deploy Payment
+  hosts: payment
+  become: true
+  tags: payment
+  roles:
+    - payment

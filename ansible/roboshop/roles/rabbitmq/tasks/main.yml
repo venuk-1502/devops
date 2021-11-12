@@ -1,0 +1,33 @@
+- name: Setting hostname
+  ansible.builtin.shell:
+    cmd: set-hostname {{COMPONENT}}
+
+- name: Setup YUM repositories for RabbitMQ.
+  ansible.builtin.shell:
+    cmd: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+
+- name: Install RabbitMQ and dependency
+  ansible.builtin.yum:
+    name:
+    - https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm
+    - rabbitmq-server
+    state: present
+
+- name: Restart mongod service
+  ansible.builtin.systemd:
+    name: rabbitmq-server
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+- name: Setup Roboshop User
+  community.rabbitmq.rabbitmq_user:
+    user: roboshop
+    password: roboshop123
+    tags: administrator
+    permissions:
+      - vhost: /
+        configure_priv: .*
+        read_priv: .*
+        write_priv: .*
+    state: present

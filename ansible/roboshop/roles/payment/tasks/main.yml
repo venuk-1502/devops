@@ -1,0 +1,52 @@
+- name: Setting hostname
+  ansible.builtin.shell:
+    cmd: set-hostname {{COMPONENT}}
+
+- name: Install Python 3
+  ansible.builtin.yum:
+    name:
+      - python36
+      - gcc
+      - python3-devel
+    state: present
+
+- name: create app user roboshop
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: app_user
+
+- name: Download code
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+  vars:
+    APP_LOC: /home/roboshop/{{COMPONENT}}
+    APP_USER: roboshop
+
+- name: Install specified python requirements offline from a local directory with downloaded packages
+  pip:
+    requirements: /home/roboshop/payment/requirements.txt
+    executable: pip3
+  become: true
+
+- name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+  pip:
+    name: bottle
+    executable: pip3.3
+
+- name: Update APP user UID
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/payment/payment.ini
+    regexp: '^uid = '
+    line: uid = {{app_user_info.uid}}
+
+- name: Update APP user UID
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/payment/payment.ini
+    regexp: '^gid = '
+    line: uid = {{app_user_info.group}}
+
+- name: systemd service configuration and restart
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
