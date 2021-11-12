@@ -17,6 +17,7 @@
     name:
     - mysql-community-server
     - python36-PyMySQL.noarch
+    - MySQL-python.x86_64
     state: present
 
 - name: Getting default root password
