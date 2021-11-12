@@ -57,7 +57,7 @@
   community.mysql.mysql_db:
     state: import
     login_user: root
-    login_password: {{NEW_PASSWORD}}
+    login_password: "{{NEW_PASSWORD}}"
     name: all
     target: /tmp/mysql-main/shipping.sql
 
