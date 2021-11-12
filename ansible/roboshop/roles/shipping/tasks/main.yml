@@ -23,6 +23,7 @@
 - name: Clean Maven existing info
   ansible.builtin.shell:
     cmd: mvn clean package
+    chdir: /home/roboshop/shipping/
   become_user: roboshop
 
 - name: Copy shipping.jar file
