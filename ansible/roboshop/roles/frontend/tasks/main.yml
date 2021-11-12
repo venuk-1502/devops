@@ -1,3 +1,7 @@
+- name: Setting hostname
+  ansible.builtin.shell:
+    cmd: set-hostname {{COMPONENT}}
+
 - name: Install the latest version of Nginx
   ansible.builtin.yum:
     name: nginx

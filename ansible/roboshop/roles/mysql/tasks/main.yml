@@ -1,6 +1,6 @@
 - name: Setting hostname
   ansible.builtin.shell:
-    cmd: set-hostname {{COMPONENT}}-dev
+    cmd: set-hostname {{COMPONENT}}
 
 - name: Download mysql repo file
   ansible.builtin.get_url:
@@ -15,6 +15,20 @@
 - name: Install MySQL
   ansible.builtin.yum:
     name: mysql-community-server
+    state: present
+
+- name: Getting default root password
+  ansible.builtin.shell:
+    cmd: cat /var/log/mysqld.log|grep "A temporary password"|awk '{print $NF}'
+    register: default_pass
+
+- name: Set MySQL root password
+  community.mysql.mysql_user:
+    login_host: 'localhost'
+    login_user: 'root'
+    login_password: "{{default_pass}}"
+    name: 'root'
+    password: DevOps321
     state: present
 
 - name: Restart mysqld service

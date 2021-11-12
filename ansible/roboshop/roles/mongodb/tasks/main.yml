@@ -1,3 +1,7 @@
+- name: Setting hostname
+  ansible.builtin.shell:
+    cmd: set-hostname {{COMPONENT}}
+
 - name: Download mongodb repo file
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo

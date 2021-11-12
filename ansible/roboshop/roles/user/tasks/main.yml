@@ -1,3 +1,7 @@
+- name: Setting hostname
+  ansible.builtin.shell:
+    cmd: set-hostname {{COMPONENT}}
+
 - name: Install NodeJS
   ansible.builtin.include_role:
     name: common

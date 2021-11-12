@@ -1,3 +1,7 @@
+- name: Setting hostname
+  ansible.builtin.shell:
+    cmd: set-hostname {{COMPONENT}}
+
 - name: Install required utilities
   ansible.builtin.yum:
     name:
