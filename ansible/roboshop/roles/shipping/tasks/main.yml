@@ -2,3 +2,63 @@
   ansible.builtin.shell:
     cmd: set-hostname {{COMPONENT}}
 
+- name: Install Maven
+  ansible.builtin.yum:
+    name: maven
+    state: present
+
+- name: create app user roboshop
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: app_user
+
+- name: Download code
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+  vars:
+    APP_LOC: /home/roboshop/{{COMPONENT}}
+    APP_USER: roboshop
+
+- name: Copy shipping.jar file
+  ansible.builtin.copy:
+    src: /home/roboshop/shipping/target/shipping-1.0.jar
+    dest: /home/roboshop/shipping/shipping.jar
+    remote_src: yes
+
+- name: Removing shipping-1.0.jar file
+  ansible.builtin.file:
+    path: /home/roboshop/shipping/target/shipping-1.0.jar
+    state: absent
+
+- name: systemd service configuration and restart
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
+
+
+
+
+## yum install maven -y
+#  As per the standard process, we always run the applications as a normal user.
+#  Create a user
+#
+#  # useradd roboshop
+#  Download the repo
+#  $ cd /home/roboshop
+#  $ curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/shipping/archive/main.zip"
+#  $ unzip /tmp/shipping.zip
+#  $ mv shipping-main shipping
+#  $ cd shipping
+#  $ mvn clean package
+#  $ mv target/shipping-1.0.jar shipping.jar
+
+
+#  Update Servers IP address in /home/roboshop/shipping/systemd.service
+#
+#  Copy the service file and start the service.
+#
+## mv /home/roboshop/shipping/systemd.service /etc/systemd/system/shipping.service
+## systemctl daemon-reload
+## systemctl start shipping
+## systemctl enable shipping
