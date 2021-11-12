@@ -25,3 +25,10 @@
   tags: cart
   roles:
     - cart
+
+- name: Deploy User
+  hosts: user
+  become: true
+  tags: user
+  roles:
+    - user
