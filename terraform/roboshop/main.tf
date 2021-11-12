@@ -87,3 +87,21 @@ terraform {
     region = "us-east-1"
   }
 }
+
+resource "null_resource" "ansible" {
+  depends_on = [aws_route53_record.route53_records]
+  count      = length(var.components)
+  provisioner "remote-exec" {
+    connection {
+      host     = element(aws_spot_instance_request.ec2_instance.*.private_ip, count.index)
+      user     = "root"
+      password = "DevOps321"
+    }
+    inline = [
+      "sudo yum install python3-pip -y",
+      "sudo pip3 install pip --upgrade",
+      "sudo pip3 install ansible",
+      "ansible-pull -U https://github.com/venuk-1502/devops.git ansible/roboshop/roboshop-pull.yml -e COMPONENT=${element(var.components, count.index)} -e ENV=dev"
+    ]
+  }
+}
