@@ -46,7 +46,7 @@
 
 - name: Change the password to new password
   ansible.builtin.shell:
-    cmd: mysql --connect-expired-password -uroot -p{{defaultpass.stdout}} < /tmp/pass.sql
+    cmd: mysql --connect-expired-password -uroot -p"{{defaultpass.stdout}}" < /tmp/pass.sql
   when: check_new_pass.failed
 
 - name: Download MySQL schema
