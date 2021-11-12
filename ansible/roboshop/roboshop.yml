@@ -18,3 +18,10 @@
   tags: mongodb
   roles:
     - mongodb
+
+- name: Deploy Cart
+  hosts: cart
+  become: true
+  tags: cart
+  roles:
+    - cart

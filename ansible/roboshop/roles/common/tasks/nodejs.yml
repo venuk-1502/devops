@@ -1,0 +1,31 @@
+- name: create app user roboshop
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: app_user
+
+- name: Install NodeJS
+  ansible.builtin.yum:
+    name:
+      - nodejs
+      - make
+      - gcc-c++
+    state: present
+
+- name: Download code
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+  vars:
+    APP_LOC: /home/roboshop/{{COMPONENT}}
+    APP_USER: roboshop
+
+- name: Install packages based on package.json using the npm
+  community.general.npm:
+    path: /home/roboshop/{{COMPONENT}}
+    state: present
+  become_user: roboshop
+
+- name: systemd service configuration and restart
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: systemd
