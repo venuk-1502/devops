@@ -16,5 +16,5 @@ mongodb-dev.knowaws.com
 redis-dev.knowaws.com
 [rabbitmq]
 rabbitmq-dev.knowaws.com
-[users]
+[user]
 user-dev.knowaws.com
