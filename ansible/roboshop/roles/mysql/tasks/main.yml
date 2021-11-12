@@ -25,22 +25,31 @@
     cmd: cat /var/log/mysqld.log|grep "A temporary password"|awk '{print $NF}'
   register: defaultpass
 
-- name: test mysql_secure_installation
-  mysql_secure_installation:
-    login_password: "{{defaultpass}}"
-    new_password: DevOps321
-    user: root
-    login_host: localhost
-    hosts: ['localhost', '127.0.0.1', '::1']
-    change_root_password: true
-    remove_anonymous_user: true
-    disallow_root_login_remotely: true
-    remove_test_db: true
-  register: mysql_secure
-
-# To see detailed output
-- debug:
-    var: mysql_secure
+- name: Set MySQL root password
+  community.mysql.mysql_user:
+    login_host: 'localhost'
+    login_user: 'root'
+    login_password: "{{defaultpass.stdout}}"
+    name: 'root'
+    password: DevOps321
+    state: present
+#
+#- name: test mysql_secure_installation
+#  mysql_secure_installation:
+#    login_password: "{{defaultpass}}"
+#    new_password: DevOps321
+#    user: root
+#    login_host: localhost
+#    hosts: ['localhost', '127.0.0.1', '::1']
+#    change_root_password: true
+#    remove_anonymous_user: true
+#    disallow_root_login_remotely: true
+#    remove_test_db: true
+#  register: mysql_secure
+#
+## To see detailed output
+#- debug:
+#    var: mysql_secure
 
 - name: Restart mysqld service
   ansible.builtin.systemd:
