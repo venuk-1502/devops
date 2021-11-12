@@ -20,11 +20,17 @@
     APP_LOC: /home/roboshop/{{COMPONENT}}
     APP_USER: roboshop
 
+- name: Clean Maven existing info
+  ansible.builtin.shell:
+    cmd: mvn clean package
+  become_user: roboshop
+
 - name: Copy shipping.jar file
   ansible.builtin.copy:
     src: /home/roboshop/shipping/target/shipping-1.0.jar
     dest: /home/roboshop/shipping/shipping.jar
     remote_src: yes
+  become_user: roboshop
 
 - name: Removing shipping-1.0.jar file
   ansible.builtin.file:
