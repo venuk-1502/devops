@@ -35,6 +35,7 @@
 - name: Check whether password was already set to new password
   ansible.builtin.shell:
     cmd: echo 'show databases;'|mysql -uroot -p{{NEW_PASSWORD}}
+  ignore_errors: yes
   register: check_new_pass
 
 - name: Copy Password reset sql file
