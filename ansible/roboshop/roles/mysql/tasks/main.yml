@@ -20,7 +20,7 @@
 - name: Getting default root password
   ansible.builtin.shell:
     cmd: cat /var/log/mysqld.log|grep "A temporary password"|awk '{print $NF}'
-    register: defaultpass
+  register: defaultpass
 
 - name: Set MySQL root password
   community.mysql.mysql_user:
