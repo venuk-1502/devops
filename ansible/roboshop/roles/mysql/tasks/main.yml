@@ -1,3 +1,7 @@
+- name: Setting hostname
+  ansible.builtin.shell:
+    cmd: set-hostname {{COMPONENT}}-dev
+
 - name: Download mysql repo file
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
@@ -8,7 +12,7 @@
     name: mariadb-libs
     state: absent
 
-- name: Install mongodb
+- name: Install MySQL
   ansible.builtin.yum:
     name: mysql-community-server
     state: present
