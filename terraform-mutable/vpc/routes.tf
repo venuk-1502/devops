@@ -46,10 +46,30 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
-#
-#resource "aws_route" "route" {
-#  route_table_id            = "rtb-4fbb3ac4"
-#  destination_cidr_block    = "10.0.1.0/22"
-#  vpc_peering_connection_id = "pcx-45ff3dc1"
-#  depends_on                = [aws_route_table.testing]
-#}
+data "aws_route_tables" "default-vpc-routes" {
+  vpc_id = var.DEFAULT_VPC_ID
+}
+
+locals {
+  VPC_CIDR_MAIN = split(",", var.VPC_CIDR_MAIN)
+  VPC_CIDR_ALL  = concat(local.VPC_CIDR_MAIN, var.ADD_VPC_CIDR)
+}
+
+locals {
+  association-list = flatten([
+  for cidr in local.VPC_CIDR_ALL : [
+  for route_table in tolist(data.aws_route_tables.default-vpc-routes.ids) : {
+    cidr        = cidr
+    route_table = route_table
+  }
+  ]
+  ])
+}
+
+
+resource "aws_route" "route" {
+  count = length(local.association-list)
+  route_table_id            = tomap(element(local.association-list, count.index))["route_table"]
+  destination_cidr_block    = tomap(element(local.association-list, count.index))["cidr"]
+  vpc_peering_connection_id = aws_vpc_peering_connection.peering.id
+}
