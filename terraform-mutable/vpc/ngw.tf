@@ -12,6 +12,5 @@ resource "aws_nat_gateway" "ngw" {
   tags = {
     Name = "NGW-${var.ENV}"
   }
-
   depends_on = [aws_internet_gateway.igw]
 }
