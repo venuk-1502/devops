@@ -81,11 +81,6 @@ data "aws_route_tables" "default-vpc-routes" {
 }
 
 locals {
-  VPC_CIDR_MAIN = split(",", var.VPC_CIDR_MAIN)
-  VPC_CIDR_ALL  = concat(local.VPC_CIDR_MAIN, var.ADD_VPC_CIDR)
-}
-
-locals {
   association-list = flatten([
   for cidr in local.VPC_CIDR_ALL : [
     for route_table in tolist(data.aws_route_tables.default-vpc-routes.ids) : {
