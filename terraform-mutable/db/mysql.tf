@@ -1,10 +1,10 @@
 resource "aws_db_instance" "mysql" {
   allocated_storage      = 10
-  identifier             = "mysql-${var.ENV}"
+  identifier             = "mysql${var.ENV}"
   engine                 = "mysql"
   engine_version         = "5.7"
   instance_class         = var.MYSQL_INSTANCE_TYPE
-  name                   = "mysql-${var.ENV}"
+  name                   = "mysql${var.ENV}"
   username               = local.rds_user
   password               = local.rds_pass
   parameter_group_name   = aws_db_parameter_group.mysql-pg.name
