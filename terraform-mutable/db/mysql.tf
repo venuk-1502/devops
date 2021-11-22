@@ -15,7 +15,7 @@ resource "aws_db_instance" "mysql" {
 
 resource "aws_db_parameter_group" "mysql-pg" {
   name        = "mysql-pg"
-  family      = "mysql5.6"
+  family      = "mysql5.7"
   description = "mysql pg"
 }
 
