@@ -15,6 +15,3 @@ data "aws_secretsmanager_secret_version" "secret_id" {
   secret_id = data.aws_secretsmanager_secret.by-name.id
 }
 
-output "example" {
-  value = jsondecode(data.aws_secretsmanager_secret_version.secret_id.secret_string)["SSH_USER"]
-}
