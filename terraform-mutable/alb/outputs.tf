@@ -10,6 +10,7 @@ output "PRIVATE_ALB_DNS" {
   value = aws_lb.privatelb.dns_name
 }
 
+
 output "PUBLIC_ALB_DNS" {
   value = aws_lb.publiclb.dns_name
 }
