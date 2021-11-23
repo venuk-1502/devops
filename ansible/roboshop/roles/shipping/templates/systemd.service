@@ -3,7 +3,7 @@ Description=Shipping Service
 
 [Service]
 User=roboshop
-Environment=CART_ENDPOINT=cart-{{ENV}}.knowaws.com:8080
+Environment=CART_ENDPOINT=cart-{{ENV}}.knowaws.com:80
 Environment=DB_HOST=mysql-{{ENV}}.knowaws.com
 ExecStart=/bin/java -jar /home/roboshop/shipping/shipping.jar
 SyslogIdentifier=shipping
