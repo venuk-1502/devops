@@ -5,10 +5,6 @@ resource "aws_lb_target_group" "tg" {
   vpc_id   = data.terraform_remote_state.vpc.outputs.VPC_ID
 }
 
-locals {
-  INSTANCE_IDS = concat(aws_spot_instance_request.spot-instance.*.spot_instance_id, aws_instance.od-instance.*.id)
-}
-
 resource "aws_lb_target_group_attachment" "tg" {
   count = length(local.INSTANCE_IDS)
   target_group_arn = aws_lb_target_group.tg.arn
