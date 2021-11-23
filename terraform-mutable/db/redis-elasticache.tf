@@ -11,16 +11,16 @@ resource "aws_elasticache_cluster" "redis" {
 }
 
 resource "aws_elasticache_parameter_group" "redis" {
-  name   = "cache-params"
+  name   = "redis-${var.ENV}"
   family = "redis6.x"
 }
 
 resource "aws_elasticache_subnet_group" "redis" {
-  name       = "redis_subnet_group"
+  name       = "redis-${var.ENV}"
   subnet_ids = data.terraform_remote_state.vpc.outputs.PRIVATE_SUBNETS_IDS
 
   tags = {
-    Name = "redis_subnet_group"
+    Name = "redis-${var.ENV}"
   }
 }
 
