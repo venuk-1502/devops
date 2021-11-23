@@ -4,5 +4,5 @@ resource "aws_route53_record" "route53" {
   name    = "${var.COMPONENT}-${var.ENV}"
   type    = "CNAME"
   ttl     = "300"
-  records = [data.terraform_remote_state.alb.outputs.PRIVATE_ALB_ARN]
+  records = [data.terraform_remote_state.alb.outputs.PRIVATE_ALB_DNS]
 }
