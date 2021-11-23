@@ -74,7 +74,7 @@ resource "aws_route53_record" "mongo" {
   allow_overwrite = true
   type    = "A"
   ttl     = "300"
-  records = aws_spot_instance_request.mongo.private_ip
+  records = [aws_spot_instance_request.mongo.private_ip]
 }
 
 
