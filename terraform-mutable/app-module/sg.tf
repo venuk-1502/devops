@@ -2,6 +2,7 @@ resource "aws_security_group" "sg" {
   name        = "${var.COMPONENT}-${var.ENV}"
   description = "${var.COMPONENT}-${var.ENV}"
   vpc_id      = data.terraform_remote_state.vpc.outputs.VPC_ID
+  revoke_rules_on_delete = true
 
   ingress = [
     {
