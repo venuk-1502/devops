@@ -1,5 +1,5 @@
 resource "aws_spot_instance_request" spot-instance {
-  count = length(var.SPOT_INSTANCE_COUNT)
+  count = var.SPOT_INSTANCE_COUNT
   ami           = data.aws_ami.devops_ami.id
   instance_type = var.INSTANCE_TYPE
   spot_type = "persistent"
@@ -20,7 +20,7 @@ resource "aws_ec2_tag" "ec2-tag" {
 }
 
 resource "aws_instance" "od-instance" {
-  count         = length(var.OD_INSTANCE_COUNT)
+  count         = var.OD_INSTANCE_COUNT
   ami           = data.aws_ami.devops_ami.id
   instance_type = var.INSTANCE_TYPE
   vpc_security_group_ids = [aws_security_group.sg.id]
