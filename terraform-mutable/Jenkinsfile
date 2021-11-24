@@ -26,7 +26,7 @@ pipeline {
         //sh 'echo ${SSH} >/tmp/out'
 
         sh '''
-        cd vpc
+        cd terraform-mutable/vpc
         make ${ENV}-${ACTION}
         '''
       }
@@ -46,7 +46,7 @@ pipeline {
 //      }
           steps {
             sh '''
-            cd db
+            cd terraform-mutable/db
             make ${ENV}-${ACTION}
             '''
           }
@@ -55,7 +55,7 @@ pipeline {
         stage('ALB') {
           steps {
             sh '''
-            cd alb
+            cd terraform-mutable/alb
             make ${ENV}-${ACTION}
             '''
           }
