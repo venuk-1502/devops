@@ -32,9 +32,10 @@ pipeline {
       }
     }
 
-    stage('DB & ALB') {
-      parallel {
-        stage('DB') {
+//    stage('DB & ALB') {
+//      parallel {
+//        stage('DB') {
+
 //      when {
 //        beforeInput true
 //        branch 'production'
@@ -44,23 +45,24 @@ pipeline {
 //        ok "Yes, we should."
 //        submitter "admin"
 //      }
-          steps {
-            sh '''
-            cd terraform-mutable/db
-            make ${ENV}-${ACTION}
-            '''
-          }
-        }
 
-        stage('ALB') {
-          steps {
-            sh '''
-            cd terraform-mutable/alb
-            make ${ENV}-${ACTION}
-            '''
-          }
-        }
-      }}
-
+//          steps {
+//            sh '''
+//            cd terraform-mutable/db
+//            make ${ENV}-${ACTION}
+//            '''
+//          }
+//        }
+//
+//        stage('ALB') {
+//          steps {
+//            sh '''
+//            cd terraform-mutable/alb
+//            make ${ENV}-${ACTION}
+//            '''
+//          }
+//        }
+//      }}
+//
   }
 }
