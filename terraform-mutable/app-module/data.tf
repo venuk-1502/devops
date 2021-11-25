@@ -26,6 +26,6 @@ data "aws_secretsmanager_secret_version" "secret_id" {
 
 data "aws_ami" "devops_ami" {
   most_recent      = true
-  name_regex       = "^Centos"
-  owners           = ["973714476881"]
+  name_regex       = "^Devops-AMI-Ansible"
+  owners           = ["378784712135"]
 }
