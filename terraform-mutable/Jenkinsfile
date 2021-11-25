@@ -27,14 +27,14 @@ pipeline {
 
         sh '''
         cd terraform-mutable/vpc
-        make ${ENV}-${ACTION}
+        sudo make ${ENV}-${ACTION}
         '''
       }
     }
 
-//    stage('DB & ALB') {
-//      parallel {
-//        stage('DB') {
+    stage('DB & ALB') {
+      parallel {
+        stage('DB') {
 
 //      when {
 //        beforeInput true
@@ -46,23 +46,23 @@ pipeline {
 //        submitter "admin"
 //      }
 
-//          steps {
-//            sh '''
-//            cd terraform-mutable/db
-//            make ${ENV}-${ACTION}
-//            '''
-//          }
-//        }
-//
-//        stage('ALB') {
-//          steps {
-//            sh '''
-//            cd terraform-mutable/alb
-//            make ${ENV}-${ACTION}
-//            '''
-//          }
-//        }
-//      }}
-//
+          steps {
+            sh '''
+            cd terraform-mutable/db
+            sudo make ${ENV}-${ACTION}
+            '''
+          }
+        }
+
+        stage('ALB') {
+          steps {
+            sh '''
+            cd terraform-mutable/alb
+            sudo make ${ENV}-${ACTION}
+            '''
+          }
+        }
+      }}
+
   }
 }
