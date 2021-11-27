@@ -1,8 +1,22 @@
 - name: Setting hostname
   ansible.builtin.shell:
-    cmd: set-hostname {{COMPONENT}}
+    cmd: rpm -qa
 
 - name: Install NodeJS
   ansible.builtin.include_role:
     name: common
     tasks_from: nodejs
+
+- name: installing nodejs
+  ansible.builtin.yum:
+    cmd: yum install nodejs -y
+
+- name: Install the latest version of Apache
+ ansible.builtin.copy:
+    name: python3
+    state: latest
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: /srv/myfiles/foo.conf
+    dest: /etc/foo.conf
