@@ -42,10 +42,10 @@ for(int i in 0..count) {
                     }
                     'branches' {
                         'hudson.plugins.git.BranchSpec' {
-                            'name'('/tags/')
+                            'name'('*/tags/*')
                         }
                         'hudson.plugins.git.BranchSpec' {
-                            'name'('/main')
+                            'name'('*/main')
                         }
                     }
                 }
