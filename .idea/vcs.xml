@@ -8,9 +8,15 @@
     <mapping directory="$PROJECT_DIR$/payment" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/roboshop/cart" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/roboshop/catalogue" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/roboshop/frontend" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/roboshop/payment" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/roboshop/shipping" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/roboshop/user" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/roboshop1/cart" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/roboshop1/catalogue" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/roboshop1/payment" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/roboshop1/shipping" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/roboshop1/user" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/shipping" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/user" vcs="Git" />
   </component>

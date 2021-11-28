@@ -1,6 +1,6 @@
 def call(Map params = [:]) {
-    def args:LinkedHasMap = [
-            COMPONENT : ''
+    def args : LinkedHasMap = [
+            COMPONENT : '',
             LABEL     : 'master'
     ]
     args << params
