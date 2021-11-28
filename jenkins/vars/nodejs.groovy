@@ -1,12 +1,19 @@
-def call() {
+def call(Map params = [:]) {
+    def args:LinkedHasMap = [
+            COMPONENT : ''
+            LABEL     : 'master'
+    ]
+    args << params
+
     pipeline {
-        agent { label 'WORKSTATION' }
+        agent { label params.LABEL }
 
         stages {
 
             stage('Compile') {
                 steps {
                     sh 'echo Compile'
+                    sh "echo COMPONENT = ${params.COMPONENT}"
                 }
             }
 

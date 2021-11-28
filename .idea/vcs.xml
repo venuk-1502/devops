@@ -6,6 +6,11 @@
     <mapping directory="$PROJECT_DIR$/catalogue" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/frontend" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/payment" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/roboshop/cart" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/roboshop/catalogue" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/roboshop/payment" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/roboshop/shipping" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/roboshop/user" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/shipping" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/user" vcs="Git" />
   </component>
