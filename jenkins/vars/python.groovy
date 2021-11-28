@@ -20,14 +20,6 @@ def call(Map params = [:]) {
                     }
                 }
             }
-            stage('Download NodeJS dependencies') {
-                steps {
-                    sh 'echo Download NodeJS dependencies'
-                    sh "echo COMPONENT = ${params.COMPONENT}"
-                    sh 'env'
-                    //GIT_BRANCH
-                }
-            }
 
             stage('Code Quality') {
                 steps {

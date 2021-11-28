@@ -20,9 +20,9 @@ def call(Map params = [:]) {
                     }
                 }
             }
-            stage('Download NodeJS dependencies') {
+            stage('Maven Compile') {
                 steps {
-                    sh 'echo Download NodeJS dependencies'
+                    sh 'echo Maven Compiler'
                     sh "echo COMPONENT = ${params.COMPONENT}"
                     sh 'env'
                     //GIT_BRANCH
