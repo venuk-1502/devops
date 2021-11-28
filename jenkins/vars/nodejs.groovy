@@ -15,6 +15,7 @@ def call(Map params = [:]) {
                 steps {
                     sh 'echo Compile'
                     sh "echo COMPONENT = ${params.COMPONENT}"
+                    sh 'env'
                 }
             }
 
