@@ -16,6 +16,7 @@ def call(Map params = [:]) {
                     sh 'echo Compile'
                     sh "echo COMPONENT = ${params.COMPONENT}"
                     sh 'env'
+                    //GIT_BRANCH
                 }
             }
 
