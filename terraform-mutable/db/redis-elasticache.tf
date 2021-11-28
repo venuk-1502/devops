@@ -69,4 +69,5 @@ resource "aws_route53_record" "redis" {
   type    = "CNAME"
   ttl     = "300"
   records = aws_elasticache_cluster.redis.cache_nodes.*.address
+  allow_overwrite = true
 }

@@ -72,6 +72,7 @@ resource "aws_route53_record" "mysql" {
   type    = "CNAME"
   ttl     = "300"
   records = [aws_db_instance.mysql.address]
+  allow_overwrite = true
 }
 
 resource "null_resource" "schema-apply" {

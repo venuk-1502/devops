@@ -5,4 +5,5 @@ resource "aws_route53_record" "route53" {
   type    = "CNAME"
   ttl     = "300"
   records = [data.terraform_remote_state.alb.outputs.PRIVATE_ALB_DNS]
+  allow_overwrite = true
 }
