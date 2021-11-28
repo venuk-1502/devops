@@ -1,0 +1,10 @@
+pipeline {
+  stages {
+    stage {
+      steps {
+        sh "echo Hello multi-branch"
+      }
+    }
+  }
+
+}
