@@ -5,6 +5,7 @@ pipeline {
     stage('one') {
       steps {
         sh "echo Hello multi-branch"
+        sh "echo test dev-branch"
       }
     }
   }
