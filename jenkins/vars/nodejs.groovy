@@ -42,11 +42,11 @@ def call(Map params = [:]) {
             }
 
         }
-
-    }
-    post {
-        always {
-            cleanWs()
+        post {
+            always {
+                cleanWs()
+            }
         }
     }
+
 }
