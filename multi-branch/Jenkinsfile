@@ -1,6 +1,6 @@
 pipeline {
   stages {
-    stage {
+    stage('one') {
       steps {
         sh "echo Hello multi-branch"
       }
