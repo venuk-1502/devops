@@ -1,0 +1,159 @@
+pipeline {
+  agent any
+
+  options {
+    ansiColor('xterm')
+  }
+
+  parameters {
+    string(name: 'ENV', defaultValue: '', description: 'Which Environment?')
+  }
+
+
+  stages {
+
+    stage('Repo Clone') {
+      steps {
+        dir('terraform') {
+          git branch: 'master', url: 'https://github.com/venuk-1502/devops.git'
+        }
+        dir('FRONTEND') {
+          git branch: 'main', url: 'https://github.com/venuk-1502/frontend.git'
+        }
+        dir('CART') {
+          git branch: 'main', url: 'https://github.com/venuk-1502/cart.git'
+        }
+        dir('CATALOGUE') {
+          git branch: 'main', url: 'https://github.com/venuk-1502/catalogue.git'
+        }
+        dir('USER') {
+          git branch: 'main', url: 'https://github.com/venuk-1502/user.git'
+        }
+        dir('SHIPPING') {
+          git branch: 'main', url: 'https://github.com/venuk-1502/shipping.git'
+        }
+        dir('PAYMENT') {
+          git branch: 'main', url: 'https://github.com/venuk-1502/payment.git'
+        }
+      }
+    }
+
+
+
+    stage('FRONTEND') {
+          steps {
+            dir('FRONTEND') {
+              sh '''
+                  cd terraform-mutable
+                  make ${ENV}-destroy
+                '''
+            }
+          }
+        }
+
+    stage('APP COMPONENTS') {
+      parallel {
+
+        stage('CART') {
+          steps {
+            dir('CART') {
+              sh '''
+                cd terraform-mutable
+                make ${ENV}-destroy
+              '''
+            }
+          }
+        }
+
+        stage('CATALOGUE') {
+          steps {
+            dir('CATALOGUE') {
+              sh '''
+                cd terraform-mutable
+                make ${ENV}-destroy
+              '''
+            }
+          }
+        }
+
+        stage('USER') {
+          steps {
+            dir('USER') {
+              sh '''
+                cd terraform-mutable
+                make ${ENV}-destroy
+              '''
+            }
+          }
+        }
+
+        stage('SHIPPING') {
+          steps {
+            dir('SHIPPING') {
+              sh '''
+                cd terraform-mutable
+                make ${ENV}-destroy
+              '''
+            }
+          }
+        }
+
+
+        stage('PAYMENT') {
+          steps {
+            dir('PAYMENT') {
+              sh '''
+                cd terraform-mutable
+                make ${ENV}-destroy
+              '''
+            }
+          }
+        }
+
+      }
+
+    }
+
+    stage('DB-&-ALB') {
+      parallel {
+
+        stage('DB') {
+          steps {
+            dir('terraform/terraform-mutable') {
+              sh '''
+                cd db
+                make ${ENV}-destroy
+              '''
+            }
+          }
+        }
+
+        stage('ALB') {
+          steps {
+            dir('terraform/terraform-mutable') {
+              sh '''
+                cd alb
+                make ${ENV}-destroy
+              '''
+            }
+          }
+        }
+
+      }
+
+    }
+
+    stage('VPC') {
+      steps {
+        dir('terraform/terraform-mutable') {
+          sh '''
+            cd vpc
+            make ${ENV}-destroy
+          '''
+        }
+      }
+    }
+
+ }
+
+}
