@@ -45,7 +45,7 @@ pipeline {
             dir('FRONTEND') {
               sh '''
                   cd terraform-mutable
-                  make ${ENV}-destroy
+                  sudo make ${ENV}-destroy
                 '''
             }
           }
@@ -59,7 +59,7 @@ pipeline {
             dir('CART') {
               sh '''
                 cd terraform-mutable
-                make ${ENV}-destroy
+                sudo make ${ENV}-destroy
               '''
             }
           }
@@ -70,7 +70,7 @@ pipeline {
             dir('CATALOGUE') {
               sh '''
                 cd terraform-mutable
-                make ${ENV}-destroy
+                sudo make ${ENV}-destroy
               '''
             }
           }
@@ -81,7 +81,7 @@ pipeline {
             dir('USER') {
               sh '''
                 cd terraform-mutable
-                make ${ENV}-destroy
+                sudo make ${ENV}-destroy
               '''
             }
           }
@@ -92,7 +92,7 @@ pipeline {
             dir('SHIPPING') {
               sh '''
                 cd terraform-mutable
-                make ${ENV}-destroy
+                sudo make ${ENV}-destroy
               '''
             }
           }
@@ -104,7 +104,7 @@ pipeline {
             dir('PAYMENT') {
               sh '''
                 cd terraform-mutable
-                make ${ENV}-destroy
+                sudo make ${ENV}-destroy
               '''
             }
           }
@@ -122,7 +122,7 @@ pipeline {
             dir('terraform/terraform-mutable') {
               sh '''
                 cd db
-                make ${ENV}-destroy
+                sudo make ${ENV}-destroy
               '''
             }
           }
@@ -133,7 +133,7 @@ pipeline {
             dir('terraform/terraform-mutable') {
               sh '''
                 cd alb
-                make ${ENV}-destroy
+                sudo make ${ENV}-destroy
               '''
             }
           }
@@ -148,7 +148,7 @@ pipeline {
         dir('terraform/terraform-mutable') {
           sh '''
             cd vpc
-            make ${ENV}-destroy
+            sudo make ${ENV}-destroy
           '''
         }
       }

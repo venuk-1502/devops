@@ -43,7 +43,7 @@ pipeline {
           export TF_VAR_APP_VERSION=${APP_VERSION}
           export TF_VAR_NEXUS_USER=${NEXUS_USR}
           export TF_VAR_NEXUS_PASS=${NEXUS_PSW}
-          make ${ENV}-apply
+          sudo make ${ENV}-apply
         '''
       }
     }
