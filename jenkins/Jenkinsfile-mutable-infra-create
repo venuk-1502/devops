@@ -15,6 +15,7 @@ pipeline {
     stage('Repo Clone') {
       steps {
         dir('terraform') {
+          sh 'ls -lrt'
           git branch: 'master', url: 'https://github.com/venuk-1502/devops.git'
           sh 'ls -lrt'
         }
@@ -44,7 +45,8 @@ pipeline {
         dir('terraform') {
           sh '''
             ls -lrt
-            cd vpc
+            cd terraform-mutable/vpc
+            ls -lrt
             make ${ENV}-apply
           '''
         }
