@@ -37,7 +37,7 @@ pipeline {
 
   //  stage('App Deployment') {
   //    steps {
-  //      git branch: 'main', url: "https://DevOps-Batches@dev.azure.com/DevOps-Batches/DevOps60/_git/${COMPONENT}"
+  //      git branch: 'main', url: "https://github.com/venuk-1502/${COMPONENT}.git"
   //      sh '''
   //        cd terraform-mutable
   //        export TF_VAR_APP_VERSION=${APP_VERSION}

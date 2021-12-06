@@ -1,8 +1,8 @@
-- name: Download and Unarchive app files for {{COMPONENT}}
-  ansible.builtin.unarchive:
-    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
-    dest: /tmp/
-    remote_src: yes
+#- name: Download and Unarchive app files for {{COMPONENT}}
+#  ansible.builtin.unarchive:
+#    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
+#    dest: /tmp/
+#    remote_src: yes
 
 - name: Recursively remove existing directory content
   ansible.builtin.file:
@@ -10,10 +10,29 @@
     state: absent
   when: APP_TYPE == "backend" or APP_TYPE == "frontend"
 
-- name: copy code to app location
-  ansible.builtin.copy:
-    src: /tmp/{{COMPONENT}}-main/
-    dest: "{{APP_LOC}}"
+#- name: copy code to app location
+#  ansible.builtin.copy:
+#    src: /tmp/{{COMPONENT}}-main/
+#    dest: "{{APP_LOC}}"
+#    remote_src: yes
+#  when: APP_TYPE == "backend"
+#  become_user: "{{APP_USER}}"
+
+- name: Create App directory
+  ansible.builtin.file:
+    path: "{{APP_LOC}}"
+    state: directory
+  when: APP_TYPE == "frontend" or APP_TYPE == "backend"
+
+- name: Download App Component
+  get_url:
+    url: http://172.31.16.46:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
+    dest: /tmp/{{COMPONENT}}.zip
+    url_username: "{{NEXUS_USER}}"
+    url_password: "{{NEXUS_PASS}}"
+
+- name: Extract {{COMPONENT}} Code
+  ansible.builtin.unarchive:
+    src: /tmp/{{COMPONENT}}.zip
+    dest: "{{APP_LOCATION}}"
     remote_src: yes
-  when: APP_TYPE == "backend"
-  become_user: "{{APP_USER}}"

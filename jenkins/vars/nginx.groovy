@@ -9,6 +9,10 @@ def call(Map params = [:]) {
     pipeline {
         agent { label params.LABEL }
 
+        environment {
+            NEXUS = credentials("NEXUS")
+        }
+
         stages {
             stage('Labeling Build') {
                 steps {
@@ -51,8 +55,14 @@ def call(Map params = [:]) {
                     expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true' ]) }
                 }
                 steps {
-                    sh 'echo Test Cases'
-                    sh 'env'
+                    sh """
+                    GIT_TAG=`echo ${GIT_BRANCH} | awk -F / '{print \$NF}'`
+                    echo \${GIT_TAG} >version
+                    cd  static
+                    zip -r ../${params.COMPONENT}-\${GIT_TAG}.zip *
+                    cd ..
+                    curl -f -v -u ${NEXUS} --upload-file ${params.COMPONENT}-\${GIT_TAG}.zip http://18.208.250.133:8081/repository/${params.COMPONENT}/${params.COMPONENT}-\${GIT_TAG}.zip
+                    """
                 }
             }
 
