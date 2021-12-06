@@ -41,7 +41,7 @@ pipeline {
 
     stage('VPC') {
       steps {
-        dir('terraform/terraform-mutable') {
+        dir('terraform') {
           sh '''
             ls -lrt
             cd vpc
