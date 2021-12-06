@@ -55,3 +55,29 @@ for(int i in 0..count) {
         }
     }
 }
+
+folder('Mutable') {
+    displayName('Mutable')
+    description('Mutable')
+}
+
+pipelineJob('Mutable/App-Deploy') {
+    configure { flowdefinition ->
+        flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
+            'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
+                'userRemoteConfigs' {
+                    'hudson.plugins.git.UserRemoteConfig' {
+                        'url'('https://github.com/venuk-1502/devops.git')
+                    }
+                }
+                'branches' {
+                    'hudson.plugins.git.BranchSpec' {
+                        'name'('*/master')
+                    }
+                }
+            }
+            'scriptPath'('jenkins/Jenkinsfile-mutable-app-deploy')
+            'lightweight'(true)
+        }
+    }
+}
