@@ -43,7 +43,7 @@ pipeline {
         dir('terraform') {
           sh '''
             cd terraform-mutable/vpc
-            sudo make ${ENV}-apply
+            make ${ENV}-apply
           '''
         }
       }
@@ -58,7 +58,7 @@ pipeline {
               sh '''
                 ls -lrt
                 cd db
-                sudo make ${ENV}-apply
+                make ${ENV}-apply
               '''
             }
           }
@@ -69,7 +69,7 @@ pipeline {
             dir('terraform/terraform-mutable') {
               sh '''
                 cd alb
-                sudo make ${ENV}-apply
+                make ${ENV}-apply
               '''
             }
           }
@@ -87,7 +87,7 @@ pipeline {
            dir('CART') {
              sh '''
                cd terraform-mutable
-               sudo make ${ENV}-apply
+               make ${ENV}-apply
              '''
            }
          }
@@ -98,7 +98,7 @@ pipeline {
            dir('CATALOGUE') {
              sh '''
                cd terraform-mutable
-               sudo make ${ENV}-apply
+               make ${ENV}-apply
              '''
            }
          }
@@ -109,7 +109,7 @@ pipeline {
            dir('USER') {
              sh '''
                cd terraform-mutable
-               sudo make ${ENV}-apply
+               make ${ENV}-apply
              '''
            }
          }
@@ -120,7 +120,7 @@ pipeline {
            dir('SHIPPING') {
              sh '''
                cd terraform-mutable
-               sudo make ${ENV}-apply
+               make ${ENV}-apply
              '''
            }
          }
@@ -132,7 +132,7 @@ pipeline {
            dir('PAYMENT') {
              sh '''
                cd terraform-mutable
-               sudo make ${ENV}-apply
+               make ${ENV}-apply
              '''
            }
          }
@@ -147,7 +147,7 @@ pipeline {
        dir('FRONTEND') {
          sh '''
              cd terraform-mutable
-             sudo make ${ENV}-apply
+             make ${ENV}-apply
            '''
        }
      }

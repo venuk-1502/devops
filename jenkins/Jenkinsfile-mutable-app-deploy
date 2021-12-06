@@ -40,10 +40,10 @@ pipeline {
         git branch: 'main', url: "https://github.com/venuk-1502/${COMPONENT}.git"
         sh '''
           cd terraform-mutable
-          sudo export TF_VAR_APP_VERSION=${APP_VERSION}
-          sudo export TF_VAR_NEXUS_USER=${NEXUS_USR}
-          sudo export TF_VAR_NEXUS_PASS=${NEXUS_PSW}
-          sudo make ${ENV}-apply
+          export TF_VAR_APP_VERSION=${APP_VERSION}
+          export TF_VAR_NEXUS_USER=${NEXUS_USR}
+          export TF_VAR_NEXUS_PASS=${NEXUS_PSW}
+          make ${ENV}-apply
         '''
       }
     }
