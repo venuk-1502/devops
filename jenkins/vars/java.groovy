@@ -37,19 +37,19 @@ def call(Map params = [:]) {
             stage('Submit for Code Quality') {
                 steps {
                     sh 'echo Code Quality'
-                    sh """
-                      sonar-scanner -Dsonar.projectKey=${params.COMPONENT} -Dsonar.sources=. -Dsonar.java.binaries=target/. -Dsonar.host.url=http://172.31.21.229:9000 -Dsonar.login=be6cfd1385e726a95a659491011c47f10ca33312
-                    """
+                  //  sh """
+                  //    sonar-scanner -Dsonar.projectKey=${params.COMPONENT} -Dsonar.sources=. -Dsonar.java.binaries=target/. -Dsonar.host.url=http://172.31.21.229:9000 -Dsonar.login=be6cfd1385e726a95a659491011c47f10ca33312
+                  //  """
                 }
             }
 
             stage('Check Code Quality gate') {
                 steps {
-                    sh 'echo Checking Code Quality Gate status'
-                    sh """
-                      sleep 5
-                      sonar-quality-gate.sh admin DevOps321 172.31.21.229 ${params.COMPONENT}
-                    """
+                 //   sh 'echo Checking Code Quality Gate status'
+                 //   sh """
+                 //     sleep 5
+                 //     sonar-quality-gate.sh admin DevOps321 172.31.21.229 ${params.COMPONENT}
+                 //   """
                 }
             }
 
