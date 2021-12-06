@@ -93,7 +93,7 @@ pipelineJob('Mutable/Infra-Create') {
                 }
                 'branches' {
                     'hudson.plugins.git.BranchSpec' {
-                        'name'('*/main')
+                        'name'('*/master')
                     }
                 }
             }
@@ -114,7 +114,7 @@ pipelineJob('Mutable/Infra-Destroy') {
                 }
                 'branches' {
                     'hudson.plugins.git.BranchSpec' {
-                        'name'('*/main')
+                        'name'('*/master')
                     }
                 }
             }
