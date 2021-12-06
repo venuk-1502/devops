@@ -35,18 +35,18 @@ pipeline {
       }
     }
 
-  //  stage('App Deployment') {
-  //    steps {
-  //      git branch: 'main', url: "https://github.com/venuk-1502/${COMPONENT}.git"
-  //      sh '''
-  //        cd terraform-mutable
-  //        export TF_VAR_APP_VERSION=${APP_VERSION}
-  //        export TF_VAR_NEXUS_USER=${NEXUS_USR}
-  //        export TF_VAR_NEXUS_PASS=${NEXUS_PSW}
-  //        make ${ENV}-apply
-  //      '''
-  //    }
-  //  }
+    stage('App Deployment') {
+      steps {
+        git branch: 'main', url: "https://github.com/venuk-1502/${COMPONENT}.git"
+        sh '''
+          cd terraform-mutable
+          export TF_VAR_APP_VERSION=${APP_VERSION}
+          export TF_VAR_NEXUS_USER=${NEXUS_USR}
+          export TF_VAR_NEXUS_PASS=${NEXUS_PSW}
+          make ${ENV}-apply
+        '''
+      }
+    }
 
   }
 
