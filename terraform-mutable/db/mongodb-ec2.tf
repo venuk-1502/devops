@@ -80,6 +80,10 @@ resource "aws_route53_record" "mongo" {
 
 resource "null_resource" "mongo" {
   depends_on = [aws_route53_record.mongo]
+  triggers = {
+    //private_ip = element(local.PRIVATE_IPS, count.index)
+    abc = timestamp()
+  }
   provisioner "remote-exec" {
     connection {
       host     = aws_spot_instance_request.mongo.private_ip

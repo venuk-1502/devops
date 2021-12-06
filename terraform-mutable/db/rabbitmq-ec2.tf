@@ -80,6 +80,10 @@ resource "aws_route53_record" "rabbitmq" {
 
 resource "null_resource" "rabbitmq" {
   depends_on = [aws_route53_record.rabbitmq]
+  triggers = {
+    //private_ip = element(local.PRIVATE_IPS, count.index)
+    abc = timestamp()
+  }
   provisioner "remote-exec" {
     connection {
       host     = aws_spot_instance_request.rabbitmq.private_ip
