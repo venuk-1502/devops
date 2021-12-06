@@ -19,7 +19,7 @@ def call(Map params = [:]) {
                 steps {
                     script {
                         str = GIT_BRANCH.split('/').last()
-                        addShortText background: 'yellow', color: 'black', borderColor: 'yellow', text: "COMPONENT = ${params.COMPONENT}"
+                       // addShortText background: 'yellow', color: 'black', borderColor: 'yellow', text: "COMPONENT = ${params.COMPONENT}"
                         addShortText background: 'yellow', color: 'black', borderColor: 'yellow', text: "BRANCH = ${str}"
 //            addShortText background: 'orange', color: 'black', borderColor: 'yellow', text: "${ENV}"
                     }
@@ -60,9 +60,9 @@ def call(Map params = [:]) {
             }
 
             stage('Upload Artifacts') {
-                when {
-                    expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true' ]) }
-                }
+              //  when {
+              //      expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true' ]) }
+              //  }
                 steps {
                     sh """
                     GIT_TAG=`echo ${GIT_BRANCH} | awk -F / '{print \\$NF}'`
