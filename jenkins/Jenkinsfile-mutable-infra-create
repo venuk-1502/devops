@@ -16,6 +16,7 @@ pipeline {
       steps {
         //dir('terraform') {
           git branch: 'master', url: 'https://github.com/venuk-1502/devops.git'
+          sh 'ls -lrt'
         //}
        // dir('FRONTEND') {
        //   git branch: 'main', url: 'https://DevOps-Batches@dev.azure.com/DevOps-Batches/DevOps60/_git/frontend'
