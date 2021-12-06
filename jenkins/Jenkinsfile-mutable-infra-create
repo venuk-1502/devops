@@ -15,9 +15,7 @@ pipeline {
     stage('Repo Clone') {
       steps {
         dir('terraform') {
-          sh 'ls -lrt'
           git branch: 'master', url: 'https://github.com/venuk-1502/devops.git'
-          sh 'ls -lrt'
         }
        // dir('FRONTEND') {
        //   git branch: 'main', url: 'https://DevOps-Batches@dev.azure.com/DevOps-Batches/DevOps60/_git/frontend'
@@ -44,10 +42,8 @@ pipeline {
       steps {
         dir('terraform') {
           sh '''
-            ls -lrt
             cd terraform-mutable/vpc
-            ls -lrt
-            make ${ENV}-apply
+            sudo make ${ENV}-apply
           '''
         }
       }
@@ -62,7 +58,7 @@ pipeline {
               sh '''
                 ls -lrt
                 cd db
-                make ${ENV}-apply
+                sudo make ${ENV}-apply
               '''
             }
           }
@@ -73,7 +69,7 @@ pipeline {
             dir('terraform/terraform-mutable') {
               sh '''
                 cd alb
-                make ${ENV}-apply
+                sudo make ${ENV}-apply
               '''
             }
           }
