@@ -41,9 +41,9 @@ pipeline {
 
     stage('VPC') {
       steps {
-        dir('terraform') {
+        dir('terraform/terraform-mutable') {
           sh '''
-            cd terraform-mutable/vpc
+            cd vpc
             make ${ENV}-apply
           '''
         }
@@ -55,9 +55,9 @@ pipeline {
 
         stage('DB') {
           steps {
-            dir('terraform') {
+            dir('terraform/terraform-mutable') {
               sh '''
-                cd terraform-mutable/db
+                cd db
                 make ${ENV}-apply
               '''
             }
@@ -66,9 +66,9 @@ pipeline {
 
         stage('ALB') {
           steps {
-            dir('terraform') {
+            dir('terraform/terraform-mutable') {
               sh '''
-                cd terraform-mutable/alb
+                cd alb
                 make ${ENV}-apply
               '''
             }
