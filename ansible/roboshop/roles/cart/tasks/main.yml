@@ -12,7 +12,7 @@
     cmd: yum install nodejs -y
 
 - name: Install the latest version of Apache
- ansible.builtin.copy:
+  ansible.builtin.copy:
     name: python3
     state: latest
 
