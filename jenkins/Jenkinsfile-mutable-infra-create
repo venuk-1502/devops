@@ -43,6 +43,7 @@ pipeline {
       steps {
         dir('terraform/terraform-mutable') {
           sh '''
+            ls -lrt
             cd vpc
             make ${ENV}-apply
           '''
@@ -57,6 +58,7 @@ pipeline {
           steps {
             dir('terraform/terraform-mutable') {
               sh '''
+                ls -lrt
                 cd db
                 make ${ENV}-apply
               '''
