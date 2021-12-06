@@ -65,10 +65,10 @@ def call(Map params = [:]) {
               //  }
                 steps {
                     sh """
-                    GIT_TAG=`echo ${GIT_BRANCH} | awk -F / '{print \\$NF}'`
-                    echo \\${GIT_TAG} >version
-                    zip -r ${params.COMPONENT}-\\${GIT_TAG}.zip node_modules server.js version
-                    curl -f -v -u ${NEXUS} --upload-file ${params.COMPONENT}-\\${GIT_TAG}.zip http://18.208.250.133:8081/repository/${params.COMPONENT}/${params.COMPONENT}-\\${GIT_TAG}.zip
+                    GIT_TAG=`echo ${GIT_BRANCH} | awk -F / '{print \$NF}'`
+                    echo \${GIT_TAG} >version
+                    zip -r ${params.COMPONENT}-\${GIT_TAG}.zip node_modules server.js version
+                    curl -f -v -u ${NEXUS} --upload-file ${params.COMPONENT}-\${GIT_TAG}.zip http://18.208.250.133:8081/repository/${params.COMPONENT}/${params.COMPONENT}-\\${GIT_TAG}.zip
                     """
                 }
             }
