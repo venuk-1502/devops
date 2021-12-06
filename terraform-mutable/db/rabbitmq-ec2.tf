@@ -75,7 +75,6 @@ resource "aws_route53_record" "rabbitmq" {
   type    = "A"
   ttl     = "300"
   records = [aws_spot_instance_request.rabbitmq.private_ip]
-  allow_overwrite = true
 }
 
 
