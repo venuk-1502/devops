@@ -94,7 +94,7 @@ resource "null_resource" "mongo" {
       "sudo yum install python3-pip -y",
       "sudo pip3 install pip --upgrade",
       "sudo pip3 install ansible",
-      "ansible-pull -U https://github.com/venuk-1502/devops.git ansible/roboshop/roboshop-pull.yml -e COMPONENT=mongodb -e ENV=${var.ENV}"
+      "ansible-pull -U https://github.com/venuk-1502/devops.git ansible/roboshop/roboshop-pull.yml -e COMPONENT=mongodb -e ENV=${var.ENV} -e APP_VERSION="
     ]
   }
 }
