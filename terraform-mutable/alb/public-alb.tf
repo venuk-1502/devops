@@ -12,6 +12,7 @@ resource "aws_lb" "publiclb" {
   }
 }
 
+
 resource "aws_route53_record" "frontend-public" {
   zone_id = data.terraform_remote_state.vpc.outputs.PUBLIC_HOSTEDZONE_ID
   name    = "roboshop-${var.ENV}"
