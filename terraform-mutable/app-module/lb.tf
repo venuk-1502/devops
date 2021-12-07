@@ -48,3 +48,37 @@ resource "aws_lb_listener" "publiclb" {
     target_group_arn = aws_lb_target_group.tg.arn
   }
 }
+
+#resource "aws_lb_listener" "public-listener-http" {
+#  count             = var.IS_PRIVATE ? 0 : 1
+#  load_balancer_arn = data.terraform_remote_state.alb.outputs.PUBLIC_ALB_ARN
+#  port              = "80"
+#  protocol          = "HTTP"
+#
+#  default_action {
+#    type = "redirect"
+#
+#    redirect {
+#      port        = "443"
+#      protocol    = "HTTPS"
+#      status_code = "HTTP_301"
+#    }
+#  }
+#
+#}
+#
+#resource "aws_lb_listener" "public-listener-https" {
+#  count             = var.IS_PRIVATE ? 0 : 1
+#  load_balancer_arn = data.terraform_remote_state.alb.outputs.PUBLIC_ALB_ARN
+#  port              = "443"
+#  protocol          = "HTTPS"
+#  ssl_policy        = "ELBSecurityPolicy-2016-08"
+#  certificate_arn   = "arn:aws:acm:us-east-1:739561048503:certificate/650d05e4-8e66-4835-a9dd-ac5c825e6e8e"
+#
+#
+#  default_action {
+#    type             = "forward"
+#    target_group_arn = aws_lb_target_group.tg.arn
+#  }
+#
+#}
