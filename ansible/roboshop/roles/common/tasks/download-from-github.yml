@@ -14,7 +14,7 @@
   copy:
     src: /tmp/{{COMPONENT}}-main/
     dest: "{{APP_LOC}}"
-    remote_src: true
+    remote_src: yes
   become_user: "{{APP_USER}}"
   when: APP_TYPE == "backend"
 
