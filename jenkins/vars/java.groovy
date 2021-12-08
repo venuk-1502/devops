@@ -27,9 +27,9 @@ def call(Map params = [:]) {
             stage('Maven Compile') {
                 steps {
                     sh 'echo Maven Compiler'
-                    sh 'mvn package'
-                    sh "echo COMPONENT = ${params.COMPONENT}"
-                    sh 'env'
+                   // sh 'mvn package'
+                   // sh "echo COMPONENT = ${params.COMPONENT}"
+                   // sh 'env'
                     //GIT_BRANCH
                 }
             }
