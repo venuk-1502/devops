@@ -4,11 +4,12 @@
     state: absent
   when: APP_TYPE == "frontend" or APP_TYPE == "backend"
 
-- name: Create App code
+- name: Create App code directory
   ansible.builtin.file:
     path: "{{APP_LOC}}"
     state: directory
   when: APP_TYPE == "frontend" or APP_TYPE == "backend"
+  become_user: roboshop
 
 - name: Download App Component
   get_url:
