@@ -17,7 +17,7 @@ data "terraform_remote_state" "alb" {
 }
 
 data "aws_secretsmanager_secret" "by-name" {
-  name = "roboshop"
+  name = "roboshop-${var.ENV}"
 }
 
 data "aws_secretsmanager_secret_version" "secret_id" {
