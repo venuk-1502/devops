@@ -17,7 +17,7 @@
     src: /tmp/frontend-main/static/
     dest: /usr/share/nginx/html/
     remote_src: yes
-  when: APP_VERSION is not defined
+  when: APP_VERSION == ""
 
 - name: Copy file with owner and permissions
   ansible.builtin.template:
