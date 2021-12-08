@@ -11,7 +11,7 @@
   when: APP_TYPE == "frontend" or APP_TYPE == "backend"
 
 - name: Copy App Code
-  copy:
+  ansible.builtin.copy:
     src: /tmp/{{COMPONENT}}-main/
     dest: "{{APP_LOC}}"
     remote_src: yes
