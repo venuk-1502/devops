@@ -18,3 +18,9 @@
   become_user: "{{APP_USER}}"
   when: APP_TYPE == "backend"
 
+- name: Copy App code from GIT
+  ansible.builtin.copy:
+    src: /tmp/frontend-main/static/
+    dest: /usr/share/nginx/html/
+    remote_src: yes
+  when: APP_TYPE == "frontend"
