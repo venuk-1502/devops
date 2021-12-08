@@ -25,6 +25,7 @@
     cmd: mvn clean package
     chdir: /home/roboshop/shipping/
   become_user: roboshop
+  when: APP_VERSION == ""
 
 - name: Copy shipping.jar file
   ansible.builtin.copy:
@@ -32,11 +33,13 @@
     dest: /home/roboshop/shipping/shipping.jar
     remote_src: yes
   become_user: roboshop
+  when: APP_VERSION == ""
 
 - name: Removing shipping-1.0.jar file
   ansible.builtin.file:
     path: /home/roboshop/shipping/target/shipping-1.0.jar
     state: absent
+  when: APP_VERSION == ""
 
 - name: systemd service configuration and restart
   ansible.builtin.include_role:
