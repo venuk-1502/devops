@@ -12,7 +12,7 @@
 
 - name: Copy App Code
   copy:
-    src: /tmp/{{COMPONENT}}-main
+    src: /tmp/{{COMPONENT}}-main/
     dest: "{{APP_LOC}}"
     remote_src: yes
   become_user: "{{APP_USER}}"
