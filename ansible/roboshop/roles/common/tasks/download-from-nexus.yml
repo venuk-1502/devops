@@ -16,9 +16,11 @@
     dest: /tmp/{{COMPONENT}}.zip
     url_username: "{{NEXUS_USER}}"
     url_password: "{{NEXUS_PASS}}"
+  become_user: roboshop
 
 - name: Extract {{COMPONENT}} Code
   ansible.builtin.unarchive:
     src: /tmp/{{COMPONENT}}.zip
     dest: "{{APP_LOC}}"
     remote_src: yes
+  become_user: roboshop
