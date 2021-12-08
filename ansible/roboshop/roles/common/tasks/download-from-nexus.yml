@@ -29,4 +29,12 @@
     src: /tmp/{{COMPONENT}}.zip
     dest: "{{APP_LOC}}"
     remote_src: yes
+  when: APP_TYPE == "backend"
   become_user: roboshop
+
+- name: Extract {{COMPONENT}} Code
+  ansible.builtin.unarchive:
+    src: /tmp/{{COMPONENT}}.zip
+    dest: "{{APP_LOC}}"
+    remote_src: yes
+  when: APP_TYPE == "frontend"
