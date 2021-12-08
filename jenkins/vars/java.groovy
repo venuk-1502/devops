@@ -69,7 +69,7 @@ def call(Map params = [:]) {
                     echo \${GIT_TAG} >version
                     cp target/${params.COMPONENT}-1.0.jar ${params.COMPONENT}.jar
                     zip -r ${params.COMPONENT}-\${GIT_TAG}.zip ${params.COMPONENT}.jar version
-                    curl -f -v -u ${NEXUS} --upload-file ${params.COMPONENT}-\${GIT_TAG}.zip http://18.208.250.133:8081/repository/${params.COMPONENT}/${params.COMPONENT}-\${GIT_TAG}.zip
+                    curl -f -v -u ${NEXUS} --upload-file ${params.COMPONENT}-\${GIT_TAG}.zip http://172.31.16.46:8081/repository/${params.COMPONENT}/${params.COMPONENT}-\${GIT_TAG}.zip
                     """
                 }
             }
