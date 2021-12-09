@@ -52,6 +52,17 @@ resource "aws_security_group" "public-alb-sg" {
       prefix_list_ids  = []
       security_groups  = []
       self             = false
+    },
+    {
+      from_port        = 443
+      to_port          = 443
+      description      = "https public traffic"
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      security_groups  = []
+      self             = false
     }
   ]
 
