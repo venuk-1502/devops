@@ -37,19 +37,6 @@ resource "aws_lb_listener_rule" "private-listener-rule" {
   }
 }
 
-resource "aws_lb_listener" "publiclb" {
-  count             = var.IS_PRIVATE ? 0 : 1
-  load_balancer_arn = data.terraform_remote_state.alb.outputs.PUBLIC_ALB_ARN
-  port              = var.PORT
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.tg.arn
-  }
-}
-
-
 resource "aws_lb_listener" "public-listener-http" {
   count             = var.IS_PRIVATE ? 0 : 1
   load_balancer_arn = data.terraform_remote_state.alb.outputs.PUBLIC_ALB_ARN
