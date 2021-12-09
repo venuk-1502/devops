@@ -65,7 +65,6 @@ resource "aws_lb_listener" "public-listener-http" {
       status_code = "HTTP_301"
     }
   }
-
 }
 
 resource "aws_lb_listener" "public-listener-https" {
