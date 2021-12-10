@@ -28,3 +28,7 @@
 #  ansible.builtin.file:
 #    path: /tmp/frontend-main
 #    state: absent
+
+- name: Setup Node Exporter
+  ansible.builtin.include_role:
+    name: node-exporter
