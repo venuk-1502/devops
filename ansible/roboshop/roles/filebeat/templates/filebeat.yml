@@ -5,7 +5,7 @@ filebeat.inputs:
       - {{LOG_FILE}}
 
 output.logstash:
-  hosts: ["logstash.roboshop.internal:5044"]
+  hosts: ["logstash.knowaws.com:5044"]
 
 filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml
