@@ -3,21 +3,21 @@ filebeat.inputs:
     enabled: true
     paths:
       - {{LOG_FILE}}
-    fields:
-      app: {{COMPONENT}}
-      env: {{ENV}}
-  {% if LOG_TYPE == "json" %}
-json.keys_under_root: true
-  {% endif %}
-  {% if MULTILINE_TYPE == "java" %}
-multiline.pattern: "^[0-9][0-9][0-9][0-9]"
-multiline.negate: true
-multiline.match: after
-  {% endif %}
-
-  {% if INCLUDE_LINES == "python" %}
-include_lines: ['^\[2']
-  {% endif %}
+#    fields:
+#      app: {{COMPONENT}}
+#      env: {{ENV}}
+#  {% if LOG_TYPE == "json" %}
+#json.keys_under_root: true
+#  {% endif %}
+#  {% if MULTILINE_TYPE == "java" %}
+#multiline.pattern: "^[0-9][0-9][0-9][0-9]"
+#multiline.negate: true
+#multiline.match: after
+#  {% endif %}
+#
+#  {% if INCLUDE_LINES == "python" %}
+#include_lines: ['^\[2']
+#  {% endif %}
 
 output.logstash:
   hosts: ["logstash.roboshop.internal:5044"]
