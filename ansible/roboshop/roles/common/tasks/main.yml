@@ -1,11 +1,16 @@
 - name: Copy rsyslog conf
-  template:
+  ansible.builtin.template:
     src: rsyslog.conf
     dest: /etc/rsyslog.d/01-roboshop.conf
   when: APP_TYPE == "backend"
 
 - name: Restart rsyslog
-  systemd:
+  ansible.builtin.systemd:
     name: rsyslog
     state: restarted
   when: APP_TYPE == "backend"
+
+- name: Import Filebeat
+  ansible.builtin.include_role:
+    name: filebeat
+  when: APP_TYPE == "backend" or APP_TYPE == "frontend"
