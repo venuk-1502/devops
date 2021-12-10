@@ -1,6 +1,6 @@
 - name: Updated systemd file
   ansible.builtin.template:
-    src: prometheus.yml
+    src: systemd.service
     dest: /etc/systemd/system/{{COMPONENT}}.service
 
 - name: Restarting {{COMPONENT}} service
