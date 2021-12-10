@@ -1,0 +1,11 @@
+- name: Copy rsyslog conf
+  template:
+    src: rsyslog.conf
+    dest: /etc/rsyslog.d/01-roboshop.conf
+  when: APP_TYPE == "backend"
+
+- name: Restart rsyslog
+  systemd:
+    name: rsyslog
+    state: restarted
+  when: APP_TYPE == "backend"
