@@ -1,9 +1,11 @@
 filebeat.inputs:
-  - type: log
-    enabled: true
-    paths:
-      - {{LOG_FILE}}
-
+- type: log
+  enabled: true
+  paths:
+    - {{LOG_FILE}}
+  fields:
+    app: {{COMPONENT}}
+    env: {{ENV}}
 output.logstash:
   hosts: ["logstash.knowaws.com:5044"]
 
