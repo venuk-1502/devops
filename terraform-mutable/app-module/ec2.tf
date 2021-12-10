@@ -33,6 +33,13 @@ resource "aws_ec2_tag" "ec2-env-tag" {
   value       = var.ENV
 }
 
+resource "aws_ec2_tag" "ec2-component-tag" {
+  count = var.SPOT_INSTANCE_COUNT
+  resource_id = element(aws_spot_instance_request.spot-instance.*.spot_instance_id, count.index)
+  key         = "Component"
+  value       = var.COMPONENT
+}
+
 resource "aws_instance" "od-instance" {
   count         = var.OD_INSTANCE_COUNT
   ami           = data.aws_ami.devops_ami.id
