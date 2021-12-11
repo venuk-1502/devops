@@ -12,10 +12,15 @@
     name: common
     tasks_from: download
 
-- name: Copy file with owner and permissions
+- name: Copy Roboshob config file
   ansible.builtin.template:
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
+
+- name: Copy nginx config file
+  ansible.builtin.template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
 
 - name: Restarting nginx service
   ansible.builtin.systemd:
