@@ -1,7 +1,7 @@
 COMPONENT: frontend
 APP_LOC: /usr/share/nginx/html
 APP_TYPE: frontend
-LOG_FILE: "/var/log/nginx.access.log"
+LOG_FILE: "/var/log/nginx/access.log"
 LOG_TYPE: raw
 MULTILINE_TYPE: none
 INCLUDE_LINES: none
