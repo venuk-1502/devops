@@ -22,12 +22,19 @@
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
 
-- name: Restarting nginx service
+- name: Start Nginx Service
   ansible.builtin.systemd:
-    name: nginx
     state: restarted
+    name: nginx
     enabled: yes
     daemon_reload: yes
+  when: AMI is not defined
+
+- name: Enable Nginx Service
+  ansible.builtin.systemd:
+    name: nginx
+    enabled: yes
+  when: AMI is defined
 
 #- name: Recursively remove directory
 #  ansible.builtin.file:
