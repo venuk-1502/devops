@@ -72,7 +72,7 @@ pipelineJob('Mutable/App-Deploy') {
                 }
                 'branches' {
                     'hudson.plugins.git.BranchSpec' {
-                        'name'('*/master')
+                        'name'('*/main')
                     }
                 }
             }
@@ -93,7 +93,7 @@ pipelineJob('Mutable/Infra-Create') {
                 }
                 'branches' {
                     'hudson.plugins.git.BranchSpec' {
-                        'name'('*/master')
+                        'name'('*/main')
                     }
                 }
             }
@@ -114,7 +114,7 @@ pipelineJob('Mutable/Infra-Destroy') {
                 }
                 'branches' {
                     'hudson.plugins.git.BranchSpec' {
-                        'name'('*/master')
+                        'name'('*/main')
                     }
                 }
             }
@@ -140,7 +140,7 @@ pipelineJob('Immutable/Infra-Create') {
                 }
                 'branches' {
                     'hudson.plugins.git.BranchSpec' {
-                        'name'('*/master')
+                        'name'('*/main')
                     }
                 }
             }
@@ -161,7 +161,7 @@ pipelineJob('Immutable/Infra-Destroy') {
                 }
                 'branches' {
                     'hudson.plugins.git.BranchSpec' {
-                        'name'('*/master')
+                        'name'('*/main')
                     }
                 }
             }
