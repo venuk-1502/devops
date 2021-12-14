@@ -9,6 +9,10 @@ def call(Map params = [:]) {
     pipeline {
         agent { label params.LABEL }
 
+        options {
+            ansiColor('xterm')
+        }
+
         environment {
             NEXUS = credentials("NEXUS")
         }
