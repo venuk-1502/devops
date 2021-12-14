@@ -7,7 +7,7 @@ resource "null_resource" "app-deploy" {
     }
 
     inline = [
-      "ansible-pull -U https://DevOps-Batches@dev.azure.com/DevOps-Batches/DevOps60/_git/ansible roboshop-pull.yml -e ENV=ENV -e COMPONENT=${var.COMPONENT} -e APP_VERSION=${var.APP_VERSION} -e NEXUS_USER=${local.NEXUS_USER} -e NEXUS_PASS=${local.NEXUS_PASS} -e AMI=true"
+      "ansible-pull -U https://github.com/venuk-1502/devops.git ansible/roboshop/roboshop-pull.yml -e ENV=ENV -e COMPONENT=${var.COMPONENT} -e APP_VERSION=${var.APP_VERSION} -e NEXUS_USER=${local.NEXUS_USER} -e NEXUS_PASS=${local.NEXUS_PASS} -e AMI=true"
     ]
   }
 }
