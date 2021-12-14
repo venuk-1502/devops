@@ -45,6 +45,7 @@ pipeline {
             dir('FRONTEND') {
               sh '''
                   cd terraform-immutable
+                  terraform init -reconfigure
                   make ${ENV}-destroy
                 '''
             }
