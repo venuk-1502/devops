@@ -50,7 +50,7 @@
   wait_for:
     port: 8080
     delay: 30
-    timeout: 180
+    timeout: 300
 
 - name: Setup Node Exporter
   ansible.builtin.include_role:
