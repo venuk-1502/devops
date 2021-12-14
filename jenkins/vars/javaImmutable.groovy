@@ -24,23 +24,32 @@ def call(Map params = [:]) {
                     }
                 }
             }
+            stage('Maven Compile') {
+                steps {
+                    sh 'echo Maven Compiler'
+                    sh 'mvn package'
+                   // sh "echo COMPONENT = ${params.COMPONENT}"
+                   // sh 'env'
+                    //GIT_BRANCH
+                }
+            }
 
             stage('Submit for Code Quality') {
                 steps {
                     sh 'echo Code Quality'
-                   // sh """
-                   //   sleep 5
-                   //   sonar-scanner -Dsonar.projectKey=${params.COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://172.31.21.229:9000 -Dsonar.login=be6cfd1385e726a95a659491011c47f10ca33312
-                   // """
+                  //  sh """
+                  //    sonar-scanner -Dsonar.projectKey=${params.COMPONENT} -Dsonar.sources=. -Dsonar.java.binaries=target/. -Dsonar.host.url=http://172.31.21.229:9000 -Dsonar.login=be6cfd1385e726a95a659491011c47f10ca33312
+                  //  """
                 }
             }
 
             stage('Check Code Quality gate') {
                 steps {
                     sh 'echo Checking Code Quality Gate status'
-                  //  sh """
-                  //    sonar-quality-gate.sh admin DevOps321 172.31.21.229 ${params.COMPONENT}
-                  //  """
+                 //   sh """
+                 //     sleep 5
+                 //     sonar-quality-gate.sh admin DevOps321 172.31.21.229 ${params.COMPONENT}
+                 //   """
                 }
             }
 
@@ -58,10 +67,37 @@ def call(Map params = [:]) {
                     sh """
                     GIT_TAG=`echo ${GIT_BRANCH} | awk -F / '{print \$NF}'`
                     echo \${GIT_TAG} >version
-                    cd  static
-                    zip -r ../${params.COMPONENT}-\${GIT_TAG}.zip *
-                    cd ..
+                    cp target/${params.COMPONENT}-1.0.jar ${params.COMPONENT}.jar
+                    zip -r ${params.COMPONENT}-\${GIT_TAG}.zip ${params.COMPONENT}.jar version
                     curl -f -v -u ${NEXUS} --upload-file ${params.COMPONENT}-\${GIT_TAG}.zip http://172.31.16.46:8081/repository/${params.COMPONENT}/${params.COMPONENT}-\${GIT_TAG}.zip
+                    """
+                }
+            }
+            stage('Make AMI') {
+                when {
+                    expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true' ]) }
+                }
+                steps {
+                    sh """
+                    GIT_TAG=`echo ${GIT_BRANCH} | awk -F / '{print \$NF}'`
+                    export TF_VAR_APP_VERSION=\${GIT_TAG}
+                    terraform init 
+                    terraform apply -auto-approve
+                    """
+                }
+            }
+
+            stage('Delete AMI Instances') {
+                when {
+                    expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true' ]) }
+                }
+                steps {
+                    sh """
+                    GIT_TAG=`echo ${GIT_BRANCH} | awk -F / '{print \$NF}'`
+                    export TF_VAR_APP_VERSION=\${GIT_TAG}
+                    terraform init 
+                    terraform state rm module.ami.aws_ami_from_instance.ami
+                    terraform destroy -auto-approve
                     """
                 }
             }

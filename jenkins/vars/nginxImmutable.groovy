@@ -65,6 +65,34 @@ def call(Map params = [:]) {
                     """
                 }
             }
+            stage('Make AMI') {
+                when {
+                    expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true' ]) }
+                }
+                steps {
+                    sh """
+                    GIT_TAG=`echo ${GIT_BRANCH} | awk -F / '{print \$NF}'`
+                    export TF_VAR_APP_VERSION=\${GIT_TAG}
+                    terraform init 
+                    terraform apply -auto-approve
+                    """
+                }
+            }
+
+            stage('Delete AMI Instances') {
+                when {
+                    expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true' ]) }
+                }
+                steps {
+                    sh """
+                    GIT_TAG=`echo ${GIT_BRANCH} | awk -F / '{print \$NF}'`
+                    export TF_VAR_APP_VERSION=\${GIT_TAG}
+                    terraform init 
+                    terraform state rm module.ami.aws_ami_from_instance.ami
+                    terraform destroy -auto-approve
+                    """
+                }
+            }
 
         //    stage('App Deployment - Dev Env') {
         //        steps {
