@@ -24,7 +24,6 @@
     url_username: "{{NEXUS_USER}}"
     url_password: "{{NEXUS_PASS}}"
 
-K
 - name: Extract {{COMPONENT}} Code
   ansible.builtin.unarchive:
     src: /tmp/{{COMPONENT}}.zip
