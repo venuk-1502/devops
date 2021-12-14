@@ -17,14 +17,14 @@
     state: directory
   when: APP_TYPE == "frontend"
 
-#- name: Download App Component
-#  get_url:
-#    url: http://172.31.16.46:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
-#    dest: /tmp/{{COMPONENT}}.zip
-#    url_username: "{{NEXUS_USER}}"
-#    url_password: "{{NEXUS_PASS}}"
+- name: Download App Component
+  get_url:
+    url: http://172.31.16.46:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
+    dest: /tmp/{{COMPONENT}}.zip
+    url_username: "{{NEXUS_USER}}"
+    url_password: "{{NEXUS_PASS}}"
 
-
+K
 - name: Extract {{COMPONENT}} Code
   ansible.builtin.unarchive:
     src: /tmp/{{COMPONENT}}.zip
