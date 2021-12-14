@@ -123,3 +123,50 @@ pipelineJob('Mutable/Infra-Destroy') {
         }
     }
 }
+
+folder('Immutable') {
+    displayName('Immutable')
+    description('Immutable')
+}
+
+pipelineJob('Immutable/Infra-Create') {
+    configure { flowdefinition ->
+        flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
+            'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
+                'userRemoteConfigs' {
+                    'hudson.plugins.git.UserRemoteConfig' {
+                        'url'('https://github.com/venuk-1502/devops.git')
+                    }
+                }
+                'branches' {
+                    'hudson.plugins.git.BranchSpec' {
+                        'name'('*/master')
+                    }
+                }
+            }
+            'scriptPath'('jenkins/Jenkinsfile-immutable-infra-create')
+            'lightweight'(true)
+        }
+    }
+}
+
+pipelineJob('Immutable/Infra-Destroy') {
+    configure { flowdefinition ->
+        flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
+            'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
+                'userRemoteConfigs' {
+                    'hudson.plugins.git.UserRemoteConfig' {
+                        'url'('https://github.com/venuk-1502/devops.git')
+                    }
+                }
+                'branches' {
+                    'hudson.plugins.git.BranchSpec' {
+                        'name'('*/master')
+                    }
+                }
+            }
+            'scriptPath'('jenkins/Jenkinsfile-immutable-infra-destroy')
+            'lightweight'(true)
+        }
+    }
+}

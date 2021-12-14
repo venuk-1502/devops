@@ -42,7 +42,7 @@ pipeline {
       steps {
         dir('TERRAFORM_CLONE') {
           sh '''
-            cd terraform-mutable/vpc
+            cd terraform-immutable/vpc
             make ${ENV}-apply
           '''
         }
@@ -54,7 +54,7 @@ pipeline {
 
         stage('DB') {
           steps {
-            dir('TERRAFORM_CLONE/terraform-mutable') {
+            dir('TERRAFORM_CLONE/terraform-immutable') {
               sh '''
                 ls -lrt
                 cd db
@@ -66,7 +66,7 @@ pipeline {
 
         stage('ALB') {
           steps {
-            dir('TERRAFORM_CLONE/terraform-mutable') {
+            dir('TERRAFORM_CLONE/terraform-immutable') {
               sh '''
                 cd alb
                 make ${ENV}-apply
@@ -86,7 +86,7 @@ pipeline {
          steps {
            dir('CART') {
              sh '''
-               cd terraform-mutable
+               cd terraform-immutable
                make ${ENV}-apply
              '''
            }
@@ -97,7 +97,7 @@ pipeline {
          steps {
            dir('CATALOGUE') {
              sh '''
-               cd terraform-mutable
+               cd terraform-immutable
                make ${ENV}-apply
              '''
            }
@@ -108,7 +108,7 @@ pipeline {
          steps {
            dir('USER') {
              sh '''
-               cd terraform-mutable
+               cd terraform-immutable
                make ${ENV}-apply
              '''
            }
@@ -119,7 +119,7 @@ pipeline {
          steps {
            dir('SHIPPING') {
              sh '''
-               cd terraform-mutable
+               cd terraform-immutable
                make ${ENV}-apply
              '''
            }
@@ -131,7 +131,7 @@ pipeline {
          steps {
            dir('PAYMENT') {
              sh '''
-               cd terraform-mutable
+               cd terraform-immutable
                make ${ENV}-apply
              '''
            }
@@ -146,7 +146,7 @@ pipeline {
      steps {
        dir('FRONTEND') {
          sh '''
-             cd terraform-mutable
+             cd terraform-immutable
              make ${ENV}-apply
            '''
        }
