@@ -5,7 +5,7 @@ data "aws_ami" "devops_ami" {
 }
 
 data "aws_secretsmanager_secret" "by-name" {
-  name = "roboshop-dev"
+  name = "roboshop"
 }
 
 data "aws_secretsmanager_secret_version" "secret_id" {

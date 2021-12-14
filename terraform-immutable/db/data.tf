@@ -8,7 +8,7 @@ data "terraform_remote_state" "vpc" {
 }
 
 data "aws_secretsmanager_secret" "by-name" {
-  name = "roboshop-${var.ENV}"
+  name = "roboshop"
 }
 
 data "aws_secretsmanager_secret_version" "secret_id" {
