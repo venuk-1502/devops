@@ -1,0 +1,6 @@
+ENV                    = "dev"
+MONGODB_INSTANCE_TYPE  = "t2.micro"
+RABBITMQ_INSTANCE_TYPE = "t2.micro"
+REDIS_INSTANCE_TYPE    = "cache.t2.micro"
+MYSQL_INSTANCE_TYPE    = "db.t2.micro"
+bucket = "tfstate-devopsvenu"
