@@ -13,6 +13,11 @@
     src: filebeat.yml
     dest: /etc/filebeat/filebeat.yml
 
+- name: Copy Update filebeat configuration
+  ansible.builtin.template:
+    src: filebeat.yml
+    dest: /tmp/filebeat.yml
+
 - name: Restart filebeat
   ansible.builtin.systemd:
     name: filebeat
