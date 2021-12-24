@@ -172,7 +172,7 @@ pipelineJob('Immutable/Infra-Destroy') {
 }
 
 
-pipelineJob('Immutable/help-deploy') {
+pipelineJob('helm-deploy') {
     configure { flowdefinition ->
         flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
             'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
