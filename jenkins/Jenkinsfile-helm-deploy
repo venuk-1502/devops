@@ -45,7 +45,7 @@ pipeline {
             ls -l ..
             ls -l ../app/helm
             cd kubernetes
-            helm upgrade -i ${COMPONENT}-${ENV} roboshop -f ../app/helm/${ENV}-values.yml --set image.tag=${APP_VERSION} --wait --timeout 1m
+            helm upgrade -i ${COMPONENT}-${ENV} roboshop -f ../../app/helm/${ENV}-values.yml --set image.tag=${APP_VERSION} --wait --timeout 1m
           '''
         }
       }
