@@ -10,6 +10,9 @@ def call(Map params = [:]) {
         agent {
             label params.LABEL
         }
+        options {
+            ansiColor('xterm')
+        }
 
         stages {
 
