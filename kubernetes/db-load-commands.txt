@@ -1,5 +1,5 @@
 ---
-kubectl run debug --image=centos:7 sleep 10000000000
+kubectl run debug --image=centos:7 -n prod sleep 10000000000
 kubectl exec -it debug -- bash
 ---
 curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
