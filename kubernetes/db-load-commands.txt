@@ -48,3 +48,10 @@ mysql -h mysql -uroot -ppassword <mysql-main/shipping.sql
 
 
      --- Grafana default username and password - admin / prom-operator
+
+
+
+For filebeat:
+
+helm repo add elastic https://helm.elastic.co
+helm install filebeat elastic/filebeat -f filebeat.yml
