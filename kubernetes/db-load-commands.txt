@@ -1,3 +1,19 @@
+---
+kubectl run debug --image=centos:7 sleep 10000000000
+kubectl exec -it debug -- bash
+---
+curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
+curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
+yum install -y mongodb-org unzip mysql
+curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
+curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
+cd /tmp
+unzip mongodb.zip
+unzip mysql.zip
+mongo --host mongo-mongodb <mongodb-main/catalogue.js
+mongo --host mongo-mongodb <mongodb-main/users.js
+mysql -h mysql -uroot -ppassword <mysql-main/shipping.sql
+
     1  cd
     2  curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
     3  yum install -y mongodb-org
@@ -22,9 +38,9 @@
    22  history
 
    ---------
-     969  kubectl exec -it -n dev rabbitmq-0 -- rabbitmqctl add_user roboshop roboshop123
-     970  kubectl exec -it -n dev rabbitmq-0 -- rabbitmqctl set_user_tags roboshop administrator
-     971  kubectl exec -it -n dev rabbitmq-0 -- rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+     969  kubectl exec -it -n prod rabbitmq-0 -- rabbitmqctl add_user roboshop roboshop123
+     970  kubectl exec -it -n prod rabbitmq-0 -- rabbitmqctl set_user_tags roboshop administrator
+     971  kubectl exec -it -n prod rabbitmq-0 -- rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
 
 
      ------- Metric server for HPA

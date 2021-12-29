@@ -52,7 +52,7 @@ pipeline {
         dir('helm') {
           sh '''
             cd kubernetes
-            helm upgrade -i ${COMPONENT}-${ENV} roboshop -f ../../app/helm/${ENV}-values.yml --set image.tag=${APP_VERSION} --wait --timeout 1m -n ${ENV}
+            helm upgrade -i ${COMPONENT}-${ENV} roboshop -f ../../app/helm/${ENV}-values.yml --set image.tag=${APP_VERSION} --wait --timeout 5m -n ${ENV}
           '''
         }
       }
@@ -73,7 +73,7 @@ pipeline {
             dir('helm') {
               sh '''
                 cd kubernetes
-                helm upgrade -i ${COMPONENT}-${ENV} roboshop -f ../../app/helm/${ENV}-values.yml --set image.tag=latest --wait --timeout 1m -n ${ENV}
+                helm upgrade -i ${COMPONENT}-${ENV} roboshop -f ../../app/helm/${ENV}-values.yml --set image.tag=latest --wait --timeout 5m -n ${ENV}
               '''
             }
           }
