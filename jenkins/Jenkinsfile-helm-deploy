@@ -23,7 +23,7 @@ pipeline {
       }
     }
 
-    stage('Check ECR image') {
+    stage('Check ECR image-with version') {
       when {
               expression {
                 return env.APP_VERSION != ''
@@ -34,6 +34,18 @@ pipeline {
           aws ecr list-images --repository-name ${COMPONENT} | jq ".imageIds[].imageTag" | grep ${APP_VERSION}
         '''
       }
+    }
+    stage('Check ECR image - latest') {
+          when {
+                  expression {
+                    return env.APP_VERSION == ''
+                  }
+          }
+          steps {
+            sh '''
+              aws ecr list-images --repository-name ${COMPONENT} | jq ".imageIds[].imageTag" | grep latest
+            '''
+          }
     }
 
     stage('App Deployment-Version') {
