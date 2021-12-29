@@ -73,6 +73,7 @@ pipeline {
             dir('helm') {
               sh '''
                 cd kubernetes
+                ls -l ../../app/helm/${ENV}-values.yml
                 helm upgrade -i ${COMPONENT}-${ENV} roboshop -f ../../app/helm/${ENV}-values.yml --set image.tag=latest --wait --timeout 5m -n ${ENV}
               '''
             }
